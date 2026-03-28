@@ -37,20 +37,30 @@ function bukaUndangan() {
   // buka scroll
   document.body.classList.remove("lock-scroll");
 
-  // scroll ke halaman 2
-  halaman2.scrollIntoView({ behavior: "smooth" });
+  // delay biar tidak lompat
+  setTimeout(() => {
+    const y = halaman2.getBoundingClientRect().top + window.pageYOffset;
+
+    window.scrollTo({
+      top: y,
+      behavior: "smooth"
+    });
+  }, 50);
 
   // hilangkan cover
   setTimeout(() => {
     if (cover) cover.style.display = "none";
-  }, 700);
+  }, 800);
 
-  // play musik (HP aman)
+  // play musik
+  const musik = document.getElementById("musik");
   if (musik && musik.paused) {
     musik.play().catch(() => {});
   }
+  setTimeout(() => {
+  triggerHalaman2Animasi();
+  }, 500);
 }
-
 
 /* =========================
    FALLBACK MUSIK (HP)
@@ -73,7 +83,15 @@ if (slides2.length > 0) {
     slides2[index2].classList.remove("active");
     index2 = (index2 + 1) % slides2.length;
     slides2[index2].classList.add("active");
-  }, 4000);
+  }, 3000);
+}
+
+function triggerHalaman2Animasi() {
+  const els = document.querySelectorAll(".zoom-out");
+
+  els.forEach(el => {
+    el.classList.add("show");
+  });
 }
 
 

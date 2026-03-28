@@ -178,6 +178,40 @@ body, html {
   font-size: 10px;
 }
 
+/* ZOOM SMOOTH HALAMAN 2 */
+@keyframes zoomOutSmooth {
+  0% {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+
+/* CLASS ANIMASI */
+.zoom-out {
+  transform: scale(0.7);
+  opacity: 0;
+}
+.zoom-out.show {
+  animation: zoomOutSmooth 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.names2.show {
+  animation-delay: 0.5s;
+}
+
+.subtitle.show {
+  animation-delay: 0.6s;
+}
+
+.countdown.show {
+  animation-delay: 0.7s;
+}
+/* end of halaman 2 */
+
 /* HALAMAN 3 */
 .halaman3 {
   height: 100dvh;
@@ -405,31 +439,17 @@ body.lock-scroll {
 
 /* Resepsi */
 .resepsi {
-  text-align: center;
-  padding: 60px 20px;
+  height: 100dvh;
+  background: #dcd6cc; /* warna cream seperti contoh */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.judul {
+.judulresepsi {
   font-family: 'Playfair Display', serif;
   font-size: 27px;
   margin-bottom: 20px;
-}
-
-.card {
-  background: #fff;
-  border-radius: 20px;
-  padding: 30px 20px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-}
-
-.tanggal {
-  font-size: 18px;
-  letter-spacing: 2px;
-}
-
-.hari {
-  font-size: 22px;
-  margin: 10px 0;
 }
 
 .garis5 {
