@@ -334,11 +334,11 @@ body, html {
 
 /* TITLE */
 .title4 {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Playfair Display', serif !important;
   font-weight: 600;
   letter-spacing: 2px;
   margin-bottom: 8px; /* sebelumnya 20px */
-  font-size: 18px;
+  font-size: 22px;
 }
 
 /* TANGGAL */
@@ -351,7 +351,9 @@ body, html {
 }
 /* SABTU */
 .hari4 {
-  font-size: 16px;
+  font-family: 'Playfair Display', serif !important;
+  font-weight: 600;
+  font-size: 20px;
   letter-spacing: 2px;
 }
 
@@ -437,6 +439,12 @@ body.lock-scroll {
 .alamat4 {
   font-family: 'Poppins', sans-serif !important;
 }
+.tanggal4,
+.tgl4,
+.tgl-besar,
+.jam-kanan{
+  font-family: 'Playfair Display', serif !important;
+}
 
 /* Resepsi */
 .resepsi {
@@ -449,6 +457,7 @@ body.lock-scroll {
 
 .judulresepsi {
   font-family: 'Playfair Display', serif;
+  font-weight: 600;
   font-size: 22px;
   margin-bottom: 10px;
 }
@@ -467,8 +476,10 @@ body.lock-scroll {
 }
 
 .tempatresepsi {
+  font-family: 'Poppins', sans-serif !important;
+  font-weight: 600;
   font-size: 16px;
-  margin-bottom: 15px;
+  margin-bottom: 4px;
 }
 /* ALAMAT RESEPSI */
 .alamatresepsi {
