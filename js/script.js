@@ -1,3 +1,23 @@
+window.addEventListener("load", function () {
+
+  // disable restore posisi scroll
+  if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+  }
+
+  // paksa kembali ke atas
+  setTimeout(() => {
+    window.scrollTo(0, 0);
+  }, 0);
+
+  // munculkan cover lagi
+  const cover = document.querySelector(".cover");
+  cover.classList.remove("hide");
+
+  // kunci scroll
+  document.body.classList.add("lock-scroll");
+
+});
 // SLIDE HALAMAN 3 (TANPA ZOOM)
 let slide3 = document.querySelectorAll(".slide3");
 let indexSlide3 = 0;
