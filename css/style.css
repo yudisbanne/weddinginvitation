@@ -304,7 +304,6 @@ body, html {
   letter-spacing: 2px;
   margin-bottom: 8px; /* sebelumnya 20px */
   font-size: 14px;
-  margin-bottom: 2px;
 }
 
 /* TANGGAL */
@@ -360,13 +359,15 @@ body, html {
 /* TEMPAT */
 .tempat4 {
   font-weight: bold;
-  font-size: 13px;
+  font-size: 14px;
+  margin-top: 20px;
+  margin-bottom: 5px;
 }
 
 /* ALAMAT */
 .alamat4 {
   font-size: 12px;
-  margin-bottom: 15px;
+  margin-bottom: 18px;
 }
 
 /* BUTTON */
