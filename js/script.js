@@ -1,148 +1,172 @@
-// music
+/* =========================
+   GLOBAL ELEMENT
+========================= */
 const musik = document.getElementById("musik");
 
-// coba unmute otomatis
-setTimeout(() => {
-  musik.muted = false;
-  musik.play().catch(() => {});
-}, 1000);
 
-// fallback kalau gagal → play saat klik pertama
-document.addEventListener("click", function () {
-  if (musik.paused) {
-    musik.muted = false;
-    musik.play().catch(() => {});
-  }
-}, { once: true });
-window.addEventListener("load", function () {
+/* =========================
+   RESET SAAT LOAD (WAJIB)
+========================= */
+window.addEventListener("load", () => {
 
-  // disable restore posisi scroll
+  // disable restore posisi scroll (HP fix)
   if ('scrollRestoration' in history) {
     history.scrollRestoration = 'manual';
   }
 
-  // paksa kembali ke atas
-  setTimeout(() => {
-    window.scrollTo(0, 0);
-  }, 0);
+  // paksa ke atas
+  window.scrollTo(0, 0);
 
-  // munculkan cover lagi
+  // tampilkan cover
   const cover = document.querySelector(".cover");
-  cover.classList.remove("hide");
+  if (cover) cover.classList.remove("hide");
 
-  // kunci scroll
+  // lock scroll
   document.body.classList.add("lock-scroll");
 
 });
-// SLIDE HALAMAN 3 (TANPA ZOOM)
-let slide3 = document.querySelectorAll(".slide3");
-let indexSlide3 = 0;
-
-setInterval(() => {
-  slide3[indexSlide3].classList.remove("active");
-
-  indexSlide3 = (indexSlide3 + 1) % slide3.length;
-
-  slide3[indexSlide3].classList.add("active");
-}, 4000);
-
-// =======================
-// HALAMAN 2 (SLIDESHOW BG)
-// =======================
-let slides2 = document.querySelectorAll(".bg-slide");
-let index2 = 0;
-
-setInterval(() => {
-  slides2[index2].classList.remove("active");
-
-  index2 = (index2 + 1) % slides2.length;
-
-  slides2[index2].classList.add("active");
-}, 2000);
 
 
-let slide4 = document.querySelectorAll(".slide4");
-let index4 = 0;
-
-setInterval(() => {
-  slide4[index4].classList.remove("active");
-
-  index4 = (index4 + 1) % slide4.length;
-
-  slide4[index4].classList.add("active");
-}, 3000);
-
-// =======================
-// BUTTON BUKA UNDANGAN
-// =======================
+/* =========================
+   BUKA UNDANGAN
+========================= */
 function bukaUndangan() {
+  const halaman2 = document.getElementById("halaman2");
+  const cover = document.querySelector(".cover");
+
   // buka scroll
   document.body.classList.remove("lock-scroll");
 
-  // play musik (kalau sudah ada)
-  const musik = document.getElementById("musik");
-  if (musik) musik.play();
-
   // scroll ke halaman 2
-  document.getElementById("halaman2").scrollIntoView({
-    behavior: "smooth"
-  });
+  halaman2.scrollIntoView({ behavior: "smooth" });
 
-  // HILANGKAN HALAMAN 1 SETELAH 1 DETIK
+  // hilangkan cover
   setTimeout(() => {
-    document.querySelector(".cover").classList.add("hide");
-  }, 800);
+    if (cover) cover.style.display = "none";
+  }, 700);
+
+  // play musik (HP aman)
+  if (musik && musik.paused) {
+    musik.play().catch(() => {});
+  }
 }
 
-// =======================
-// COUNTDOWN
-// =======================
+
+/* =========================
+   FALLBACK MUSIK (HP)
+========================= */
+document.addEventListener("click", () => {
+  if (musik && musik.paused) {
+    musik.play().catch(() => {});
+  }
+}, { once: true });
+
+
+/* =========================
+   SLIDE HALAMAN 2 (BG)
+========================= */
+const slides2 = document.querySelectorAll(".bg-slide");
+let index2 = 0;
+
+if (slides2.length > 0) {
+  setInterval(() => {
+    slides2[index2].classList.remove("active");
+    index2 = (index2 + 1) % slides2.length;
+    slides2[index2].classList.add("active");
+  }, 4000);
+}
+
+
+/* =========================
+   SLIDE HALAMAN 3
+========================= */
+const slide3 = document.querySelectorAll(".slide3");
+let index3 = 0;
+
+if (slide3.length > 0) {
+  setInterval(() => {
+    slide3[index3].classList.remove("active");
+    index3 = (index3 + 1) % slide3.length;
+    slide3[index3].classList.add("active");
+  }, 4000);
+}
+
+
+/* =========================
+   SLIDE HALAMAN 4 (JIKA ADA)
+========================= */
+const slide4 = document.querySelectorAll(".slide4");
+let index4 = 0;
+
+if (slide4.length > 0) {
+  setInterval(() => {
+    slide4[index4].classList.remove("active");
+    index4 = (index4 + 1) % slide4.length;
+    slide4[index4].classList.add("active");
+  }, 4000);
+}
+
+
+/* =========================
+   COUNTDOWN
+========================= */
 const targetDate = new Date(2027, 6, 26, 10, 0, 0).getTime();
 
-setInterval(function() {
+setInterval(() => {
   const now = new Date().getTime();
   const distance = targetDate - now;
 
-  const hari = Math.floor(distance / (1000 * 60 * 60 * 24));
-  const jam = Math.floor((distance / (1000 * 60 * 60)) % 24);
-  const menit = Math.floor((distance / 1000 / 60) % 60);
-  const detik = Math.floor((distance / 1000) % 60);
+  if (distance < 0) return;
 
-  document.getElementById("hari").innerText = hari;
-  document.getElementById("jam").innerText = jam;
-  document.getElementById("menit").innerText = menit;
-  document.getElementById("detik").innerText = detik;
+  document.getElementById("hari").innerText =
+    Math.floor(distance / (1000 * 60 * 60 * 24));
+
+  document.getElementById("jam").innerText =
+    Math.floor((distance / (1000 * 60 * 60)) % 24);
+
+  document.getElementById("menit").innerText =
+    Math.floor((distance / 1000 / 60) % 60);
+
+  document.getElementById("detik").innerText =
+    Math.floor((distance / 1000) % 60);
 }, 1000);
 
 
-// =======================
-// NAMA TAMU DARI URL
-// =======================
+/* =========================
+   NAMA TAMU DARI URL
+========================= */
 const params = new URLSearchParams(window.location.search);
 const nama = params.get("to");
 
 if (nama) {
-  document.getElementById("namaTamu").innerText = nama.replace(/\+/g, " ");
+  const el = document.getElementById("namaTamu");
+  if (el) el.innerText = nama.replace(/\+/g, " ");
 }
 
-// scrool
-document.addEventListener("DOMContentLoaded", function() {
-  document.body.classList.add("lock-scroll");
-});
 
-// animasi teks halaman 4
-const elements = document.querySelectorAll(".fade-up");
+/* =========================
+   ANIMASI HALAMAN 4 (FIX HP)
+========================= */
+const fadeEls = document.querySelectorAll(".fade-up");
 
-function revealOnScroll() {
-  const triggerBottom = window.innerHeight * 0.85;
+// observer utama
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("show");
+    }
+  });
+}, { threshold: 0.3 });
 
-  elements.forEach(el => {
-    const boxTop = el.getBoundingClientRect().top;
+fadeEls.forEach(el => observer.observe(el));
 
-    if (boxTop < triggerBottom) {
+// fallback scroll (biar 100% jalan di HP)
+window.addEventListener("scroll", () => {
+  fadeEls.forEach(el => {
+    const top = el.getBoundingClientRect().top;
+
+    if (top < window.innerHeight - 50) {
       el.classList.add("show");
     }
   });
-}
-
-window.addEventListener("scroll", revealOnScroll);
+});
