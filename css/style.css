@@ -266,12 +266,14 @@ body, html {
 
 /* CARD OVAL */
 .card-oval {
-  width: 85%;
-  height: 90%;
+  width: 92%;
+  max-width: 420px; /* batas biar tidak terlalu besar */
+  height: 92dvh;
+
   background: white;
-  border-radius: 200px;
+  border-radius: 40px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+
   display: flex;
   flex-direction: column;
 }
