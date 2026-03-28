@@ -40,15 +40,22 @@ setInterval(() => {
 // BUTTON BUKA UNDANGAN
 // =======================
 function bukaUndangan() {
+  // buka scroll
   document.body.classList.remove("lock-scroll");
 
-  document.querySelector(".cover").classList.add("hide");
+  // play musik (kalau sudah ada)
+  const musik = document.getElementById("musik");
+  if (musik) musik.play();
 
+  // scroll ke halaman 2
+  document.getElementById("halaman2").scrollIntoView({
+    behavior: "smooth"
+  });
+
+  // HILANGKAN HALAMAN 1 SETELAH 1 DETIK
   setTimeout(() => {
-    document.getElementById("halaman2").scrollIntoView({
-      behavior: "smooth"
-    });
-  }, 500);
+    document.querySelector(".cover").classList.add("hide");
+  }, 800);
 }
 
 // =======================

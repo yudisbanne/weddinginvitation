@@ -32,7 +32,7 @@ body, html {
   color: white;
 }
 .cover.hide {
-  opacity: 0;
+  display: none;
 }
 .overlay {
   position: absolute;
