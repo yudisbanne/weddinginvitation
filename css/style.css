@@ -296,6 +296,7 @@ body, html {
 
 /* TITLE */
 .title4 {
+  font-weight: bold;
   letter-spacing: 2px;
   margin-bottom: 8px; /* sebelumnya 20px */
   font-size: 14px;
@@ -363,7 +364,7 @@ body, html {
 /* TEMPAT */
 .tempat4 {
   font-weight: bold;
-  font-size: 13px;
+  font-size: 11px;
 }
 
 /* ALAMAT */
