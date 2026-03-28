@@ -40,11 +40,16 @@ setInterval(() => {
 // BUTTON BUKA UNDANGAN
 // =======================
 function bukaUndangan() {
-  document.getElementById("halaman2").scrollIntoView({
-    behavior: "smooth"
-  });
-}
+  document.body.classList.remove("lock-scroll");
 
+  document.querySelector(".cover").classList.add("hide");
+
+  setTimeout(() => {
+    document.getElementById("halaman2").scrollIntoView({
+      behavior: "smooth"
+    });
+  }, 500);
+}
 
 // =======================
 // COUNTDOWN
@@ -76,3 +81,8 @@ const nama = params.get("to");
 if (nama) {
   document.getElementById("namaTamu").innerText = nama.replace(/\+/g, " ");
 }
+
+// scrool
+document.addEventListener("DOMContentLoaded", function() {
+  document.body.classList.add("lock-scroll");
+});

@@ -24,11 +24,15 @@ body, html {
 }
 
 .cover {
+  transition: opacity 1s ease;
   height: 100dvh; /* penting untuk HP modern */
   background: url('../asset/img/bg.jpg'); no-repeat center center;
   background-size: cover;
   position: relative;
   color: white;
+}
+.cover.hide {
+  opacity: 0;
 }
 .overlay {
   position: absolute;
@@ -287,8 +291,8 @@ body, html {
 /* CONTENT */
 .content4 {
   height: 55%; /* sebelumnya 50% */
-  padding: 15px; /* kurangi padding biar tidak terlalu turun */
-  margin: 5px 0; /* kecilkan jarak antar paragraf */
+  padding: 8px; /* kurangi padding biar tidak terlalu turun */
+  margin: 2px 0; /* kecilkan jarak antar paragraf */
   height: 50%;
   text-align: center;
   color: #444;
@@ -311,7 +315,6 @@ body, html {
   gap: 15px;
   margin-bottom: 15px;
 }
-
 /* SABTU */
 .hari4 {
   font-size: 16px;
@@ -354,17 +357,10 @@ body, html {
   background: #aaa;
   margin: 15px 0;
 }
-
-/* JAM */
-.jam4 {
-  font-size: 14px;
-  margin-bottom: 10px;
-}
-
 /* TEMPAT */
 .tempat4 {
   font-weight: bold;
-  font-size: 11px;
+  font-size: 13px;
 }
 
 /* ALAMAT */
@@ -383,4 +379,10 @@ body, html {
   text-decoration: none;
   font-size: 13px;
   letter-spacing: 2px;
+}
+
+/*untuk scroll */
+body.lock-scroll {
+  overflow: hidden;
+  height: 100dvh;
 }
