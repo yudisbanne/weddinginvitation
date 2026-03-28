@@ -1,0 +1,384 @@
+/* ANIMASI ZOOM HALUS */
+@keyframes zoomInSmooth {
+  0% {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* CLASS ANIMASI */
+.animate {
+  animation: zoomInSmooth 1.6s ease-out forwards;
+  opacity: 0;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  height: 100%;
+}
+
+.cover {
+  height: 100dvh; /* penting untuk HP modern */
+  background: url('../asset/img/bg.jpg'); no-repeat center center;
+  background-size: cover;
+  position: relative;
+  color: white;
+}
+.overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+}
+
+.content {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+
+  padding: 80px 20px 80px; /* ⬅️ INI KUNCI */
+  box-sizing: border-box;
+}
+.names {
+  font-family: 'Alex Brush', cursive;
+  font-size: 47px;
+  margin: 0;
+}
+
+.guest {
+  margin-bottom: 10px;
+}
+
+.guest small {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.guest h2 {
+  margin: 8px 0;
+  font-size: 20px;
+}
+
+.btn {
+  margin-top: 10px;
+  padding: 12px 24px;
+  border: 1px solid white;
+  background: transparent;
+  color: white;
+  border-radius: 25px;
+  font-size: 16px;
+}
+
+/* HALAMAN 2 */
+.halaman2 {
+  height: 100dvh;
+  position: relative;
+  overflow: hidden;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+/* SLIDE BACKGROUND */
+.bg-slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center center;
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+}
+
+/* AKTIF */
+.bg-slide.active {
+  opacity: 1;
+}
+/* OVERLAY HALAMAN 2 */
+.halaman2::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7); /* tingkat gelap */
+  z-index: 1;
+}
+
+
+/* ISI */
+.isi {
+   position: relative;
+  z-index: 2;
+  padding: 20px;
+}
+
+/* NAMA */
+.names2 {
+  font-family: 'Dancing Script';
+  font-size: 44px;
+  margin-bottom: 15px;
+  color: white;
+}
+/* SUBTITLE */
+.subtitle {
+  font-size: 14px;
+  margin-bottom: 25px;
+   color: white;
+}
+
+/* COUNTDOWN */
+.countdown {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* BULAT */
+.circle {
+  width: 70px;
+  height: 70px;
+  background: #ff6b9a; /* pink elegan */
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ANGKA */
+.circle span {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* TEXT */
+.circle small {
+  font-size: 10px;
+}
+
+/* HALAMAN 3 */
+.halaman3 {
+  height: 100dvh;
+  background: black;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* BOX 1 (SLIDE) */
+.box1 {
+  flex: 5; /* besar */
+  position: relative;
+  overflow: hidden;
+}
+
+.slide3 {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+}
+
+.slide3.active {
+  opacity: 1;
+}
+
+/* BOX 2 (MINI FOTO) */
+.box2 {
+  flex: 1.5; /* paling kecil */
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  padding-bottom: 15px;
+}
+
+.mini-track {
+  display: flex;
+  gap: 10px;
+  animation: slideLeft 12s linear infinite;
+}
+
+.mini-track img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* ANIMASI */
+@keyframes slideLeft {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* BOX 3 (AYAT) */
+.box3 {
+  flex: 2.5; /* sedang */
+  color: white;
+  text-align: center;
+
+}
+/* NAMA */
+.names3 {
+  font-family: 'Alex Brush', cursive;
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.box3 p {
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.box1 { order: 2; } /* slide ke tengah */
+.box2 { order: 3; } /* mini ke bawah */
+.box3 { order: 1; } /* ayat ke atas */
+
+/* HALAMAN 4 */
+.halaman4 {
+  height: 100dvh;
+  background: #dcd6cc; /* warna cream seperti contoh */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* CARD OVAL */
+.card-oval {
+  width: 85%;
+  height: 90%;
+  background: white;
+  border-radius: 200px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  display: flex;
+  flex-direction: column;
+}
+
+/* FOTO ATAS */
+.img-top {
+  height: 55%;
+  background-size: cover;
+  background-position: center;
+}
+
+/* CONTENT */
+.content4 {
+  height: 55%; /* sebelumnya 50% */
+  padding: 15px; /* kurangi padding biar tidak terlalu turun */
+  margin: 5px 0; /* kecilkan jarak antar paragraf */
+  height: 50%;
+  text-align: center;
+  color: #444;
+}
+
+/* TITLE */
+.title4 {
+  letter-spacing: 2px;
+  margin-bottom: 8px; /* sebelumnya 20px */
+  font-size: 14px;
+  margin-bottom: 2px;
+}
+
+/* TANGGAL */
+.tanggal4 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+/* SABTU */
+.hari4 {
+  font-size: 16px;
+  letter-spacing: 2px;
+}
+
+/* TGL KANAN */
+.tgl4 {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+}
+/* GARIS VERTIKAL */
+.divider {
+  width: 1px;
+  height: 40px;
+  background: #999;
+}
+
+/* TANGGAL */
+.tgl4 {
+  text-align: center;
+  line-height: 1.2;
+}
+
+.tgl-besar {
+  font-size: 34px;
+  font-weight: 500;
+}
+
+/* JAM */
+.jam-kanan {
+  font-size: 14px;
+  text-align: left;
+}
+/* GARIS */
+.garis4 {
+  width: 100%;
+  height: 1px;
+  background: #aaa;
+  margin: 15px 0;
+}
+
+/* JAM */
+.jam4 {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+/* TEMPAT */
+.tempat4 {
+  font-weight: bold;
+  font-size: 13px;
+}
+
+/* ALAMAT */
+.alamat4 {
+  font-size: 12px;
+  margin-bottom: 15px;
+}
+
+/* BUTTON */
+.btn-map4 {
+  display: inline-block;
+  padding: 10px 25px;
+  border: 1px solid #bfa77a;
+  border-radius: 25px;
+  color: #bfa77a;
+  text-decoration: none;
+  font-size: 13px;
+  letter-spacing: 2px;
+}
