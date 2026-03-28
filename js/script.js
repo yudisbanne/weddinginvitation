@@ -1,3 +1,19 @@
+// music
+const musik = document.getElementById("musik");
+
+// coba unmute otomatis
+setTimeout(() => {
+  musik.muted = false;
+  musik.play().catch(() => {});
+}, 1000);
+
+// fallback kalau gagal → play saat klik pertama
+document.addEventListener("click", function () {
+  if (musik.paused) {
+    musik.muted = false;
+    musik.play().catch(() => {});
+  }
+}, { once: true });
 window.addEventListener("load", function () {
 
   // disable restore posisi scroll
