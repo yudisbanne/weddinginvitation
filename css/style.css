@@ -334,10 +334,11 @@ body, html {
 
 /* TITLE */
 .title4 {
+  font-family: 'Playfair Display', serif;
   font-weight: 600;
   letter-spacing: 2px;
   margin-bottom: 8px; /* sebelumnya 20px */
-  font-size: 16px;
+  font-size: 18px;
 }
 
 /* TANGGAL */
@@ -448,8 +449,8 @@ body.lock-scroll {
 
 .judulresepsi {
   font-family: 'Playfair Display', serif;
-  font-size: 27px;
-  margin-bottom: 20px;
+  font-size: 22px;
+  margin-bottom: 10px;
 }
 
 .garis5 {
@@ -465,9 +466,15 @@ body.lock-scroll {
   margin-bottom: 10px;
 }
 
-.tempat {
+.tempatresepsi {
   font-size: 16px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
+}
+/* ALAMAT RESEPSI */
+.alamatresepsi {
+  font-family: 'Poppins', sans-serif !important;
+  font-size: 12px;
+  margin-bottom: 22px;
 }
 
 .btn-map {
