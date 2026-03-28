@@ -129,3 +129,20 @@ if (nama) {
 document.addEventListener("DOMContentLoaded", function() {
   document.body.classList.add("lock-scroll");
 });
+
+// animasi teks halaman 4
+const elements = document.querySelectorAll(".fade-up");
+
+function revealOnScroll() {
+  const triggerBottom = window.innerHeight * 0.85;
+
+  elements.forEach(el => {
+    const boxTop = el.getBoundingClientRect().top;
+
+    if (boxTop < triggerBottom) {
+      el.classList.add("show");
+    }
+  });
+}
+
+window.addEventListener("scroll", revealOnScroll);

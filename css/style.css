@@ -260,7 +260,7 @@ body, html {
 .box3 { order: 1; } /* ayat ke atas */
 
 /* HALAMAN 4 */
-/* HALAMAN 4 */
+
 .halaman4 {
   height: 100dvh;
   background: #dcd6cc; /* warna cream seperti contoh */
@@ -382,6 +382,22 @@ body, html {
   font-size: 13px;
   letter-spacing: 2px;
 }
+/* ANIMASI TEKS HALAMAN 4 */
+.fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 1s ease;
+}
+
+.fade-up.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+.fade-up:nth-child(1) { transition-delay: 0.2s; }
+.fade-up:nth-child(2) { transition-delay: 0.4s; }
+.fade-up:nth-child(3) { transition-delay: 0.6s; }
+.fade-up:nth-child(4) { transition-delay: 0.8s; }
+.fade-up:nth-child(5) { transition-delay: 1s; }
 
 /*untuk scroll */
 body.lock-scroll {
