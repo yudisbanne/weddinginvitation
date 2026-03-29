@@ -569,6 +569,7 @@ body.lock-scroll {
   color: #555;
   text-align: left;
   margin-top: 4px;
+  margin-bottom: 0;
 }
 
 .garis-komentar {
@@ -592,11 +593,13 @@ body.lock-scroll {
 }
 #list-komentar {
   border-top: 1px solid #eee; /* 🔥 garis atas */
-  max-height: 400px; /* kira2 muat 3-4 komentar */
+  max-height: 210px; /* kira2 muat 3-4 komentar */
   overflow-y: auto;
   padding-right: 5px;
-   margin-bottom: 0;
+  margin-bottom: 0;
   padding-bottom: 0;
+  scroll-behavior: smooth;
+  box-shadow: inset 0 -10px 10px -10px rgba(0,0,0,0.1);
 }
 /* garis antar komentar */
 .item-komentar {
