@@ -5,25 +5,19 @@ const musik = document.getElementById("musik");
 
 
 /* =========================
-   RESET SAAT LOAD (WAJIB)
+   RESET SAAT LOAD
 ========================= */
 window.addEventListener("load", () => {
-
-  // disable restore posisi scroll (HP fix)
   if ('scrollRestoration' in history) {
     history.scrollRestoration = 'manual';
   }
 
-  // paksa ke atas
   window.scrollTo(0, 0);
 
-  // tampilkan cover
   const cover = document.querySelector(".cover");
   if (cover) cover.classList.remove("hide");
 
-  // lock scroll
   document.body.classList.add("lock-scroll");
-
 });
 
 
@@ -34,36 +28,29 @@ function bukaUndangan() {
   const halaman2 = document.getElementById("halaman2");
   const cover = document.querySelector(".cover");
 
-  // buka scroll
   document.body.classList.remove("lock-scroll");
 
-  // delay biar tidak lompat
   setTimeout(() => {
     const y = halaman2.getBoundingClientRect().top + window.pageYOffset;
-
-    window.scrollTo({
-      top: y,
-      behavior: "smooth"
-    });
+    window.scrollTo({ top: y, behavior: "smooth" });
   }, 50);
 
-  // hilangkan cover
   setTimeout(() => {
     if (cover) cover.style.display = "none";
   }, 800);
 
-  // play musik
-  const musik = document.getElementById("musik");
   if (musik && musik.paused) {
     musik.play().catch(() => {});
   }
+
   setTimeout(() => {
-  triggerHalaman2Animasi();
+    triggerHalaman2Animasi();
   }, 500);
 }
 
+
 /* =========================
-   FALLBACK MUSIK (HP)
+   FALLBACK MUSIK
 ========================= */
 document.addEventListener("click", () => {
   if (musik && musik.paused) {
@@ -73,7 +60,7 @@ document.addEventListener("click", () => {
 
 
 /* =========================
-   SLIDE HALAMAN 2 (BG)
+   SLIDE HALAMAN 2
 ========================= */
 const slides2 = document.querySelectorAll(".bg-slide");
 let index2 = 0;
@@ -87,9 +74,7 @@ if (slides2.length > 0) {
 }
 
 function triggerHalaman2Animasi() {
-  const els = document.querySelectorAll(".zoom-out");
-
-  els.forEach(el => {
+  document.querySelectorAll(".zoom-out").forEach(el => {
     el.classList.add("show");
   });
 }
@@ -111,7 +96,7 @@ if (slide3.length > 0) {
 
 
 /* =========================
-   SLIDE HALAMAN 4 (JIKA ADA)
+   SLIDE HALAMAN 4
 ========================= */
 const slide4 = document.querySelectorAll(".slide4");
 let index4 = 0;
@@ -163,11 +148,10 @@ if (nama) {
 
 
 /* =========================
-   ANIMASI HALAMAN 4 (FIX HP)
+   ANIMASI SCROLL
 ========================= */
 const fadeEls = document.querySelectorAll(".fade-up");
 
-// observer utama
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -178,19 +162,22 @@ const observer = new IntersectionObserver((entries) => {
 
 fadeEls.forEach(el => observer.observe(el));
 
-// fallback scroll (biar 100% jalan di HP)
 window.addEventListener("scroll", () => {
   fadeEls.forEach(el => {
-    const top = el.getBoundingClientRect().top;
-
-    if (top < window.innerHeight - 50) {
+    if (el.getBoundingClientRect().top < window.innerHeight - 50) {
       el.classList.add("show");
     }
   });
 });
 
-// komentar
+
+/* =========================
+   KOMENTAR SYSTEM
+========================= */
 document.addEventListener("DOMContentLoaded", function () {
+  let currentPage = 1;
+const perPage = 10;
+let allData = [];
 
   const URL = "https://script.google.com/macros/s/AKfycbxhnt3RkxOO2N4enbI0hghpesV79PnKpz6LabHQBtiOoTNwXvlevrkjYcppQNmlmg_l/exec";
 
@@ -203,30 +190,79 @@ document.addEventListener("DOMContentLoaded", function () {
     return;
   }
 
-  function loadKomentar() {
-    fetch(URL)
-      .then(res => res.json())
-      .then(data => {
+  /* =========================
+     FORMAT WAKTU
+  ========================= */
+  function formatWaktu(waktu) {
+    const now = new Date();
+    const past = new Date(waktu);
+    const diff = (now - past) / 1000;
 
-        listKomentar.innerHTML = "";
+    if (diff < 60) return "Baru saja";
+    if (diff < 3600) return Math.floor(diff / 60) + " menit lalu";
+    if (diff < 86400) return Math.floor(diff / 3600) + " jam lalu";
+    if (diff < 604800) return Math.floor(diff / 86400) + " hari lalu";
+    if (diff < 2592000) return Math.floor(diff / 604800) + " minggu lalu";
+    if (diff < 31536000) return Math.floor(diff / 2592000) + " bulan lalu";
 
-        data.reverse().forEach(item => {
-          const div = document.createElement("div");
-          div.classList.add("item-komentar");
-
-          div.innerHTML = `
-            <div class="nama-komentar">${item.nama}</div>
-            <div class="isi-komentar">${item.pesan}</div>
-          `;
-
-          listKomentar.appendChild(div);
-        });
-
-        count.innerText = data.length;
-      })
-      .catch(err => console.error("Load error:", err));
+    return Math.floor(diff / 31536000) + " tahun lalu";
   }
 
+  /* =========================
+     LOAD KOMENTAR
+  ========================= */
+  function loadKomentar() {
+  fetch(URL)
+    .then(res => res.json())
+    .then(data => {
+
+      allData = data.reverse();
+      renderKomentar();
+
+      count.innerText = allData.length;
+    });
+}
+function renderKomentar() {
+  listKomentar.innerHTML = "";
+
+  const start = (currentPage - 1) * perPage;
+  const end = start + perPage;
+
+  const pageData = allData.slice(start, end);
+
+  pageData.forEach(item => {
+    const div = document.createElement("div");
+    div.classList.add("item-komentar");
+
+    const waktu = formatWaktu(item.waktu);
+
+    div.innerHTML = `
+      <div class="nama-komentar"><strong>${item.nama}</strong></div>
+      <div class="isi-komentar">${item.pesan}</div>
+      <div class="waktu-komentar">🕒 ${waktu}</div>
+    `;
+
+    listKomentar.appendChild(div);
+  });
+
+  document.getElementById("page-info").innerText = currentPage;
+}
+document.getElementById("next").addEventListener("click", () => {
+  if (currentPage * perPage < allData.length) {
+    currentPage++;
+    renderKomentar();
+  }
+});
+
+document.getElementById("prev").addEventListener("click", () => {
+  if (currentPage > 1) {
+    currentPage--;
+    renderKomentar();
+  }
+});
+  /* =========================
+     KIRIM KOMENTAR
+  ========================= */
   tombol.addEventListener("click", function () {
 
     const inputNama = document.querySelector('input[placeholder="Nama"]');
@@ -237,34 +273,34 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
-    const nama = inputNama.value;
-    const pesan = inputPesan.value;
+    const nama = inputNama.value.trim();
+    const pesan = inputPesan.value.trim();
 
     if (nama === "" || pesan === "") {
       alert("Isi dulu ya 😊");
       return;
     }
 
-const formData = new FormData();
-formData.append("nama", nama);
-formData.append("pesan", pesan);
+    const formData = new FormData();
+    formData.append("nama", nama);
+    formData.append("pesan", pesan);
 
-fetch(URL, {
-  method: "POST",
-  body: formData
-})
-.then(() => {
-  alert("Berhasil dikirim 🤍");
+    fetch(URL, {
+      method: "POST",
+      body: formData
+    })
+    .then(() => {
+      alert("Berhasil dikirim 🤍");
 
-  inputNama.value = "";
-  inputPesan.value = "";
+      inputNama.value = "";
+      inputPesan.value = "";
+
+      loadKomentar();
+    })
+    .catch(err => console.error("Post error:", err));
+
+  });
 
   loadKomentar();
-})
-.catch(err => console.error("Post error:", err));
 
-}); // ✅ tutup event klik
-
-loadKomentar();
-
-}); // ✅ tutup DOMContentLoaded
+});
