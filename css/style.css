@@ -253,7 +253,7 @@ body, html {
    40% SLIDE (BOX 1)
 ========================= */
 .box1 {
-  height: 40%;
+  height: 34%;
   position: relative;
   overflow: hidden;
   margin-top: 0px;
@@ -279,7 +279,7 @@ body, html {
    30% MINI FOTO (BOX 2)
 ========================= */
 .box2 {
-  height: 30%;
+  height: 34%;
   display: flex;
   align-items: center;
   overflow: hidden;
@@ -295,7 +295,7 @@ body, html {
 /* ukuran foto */
 .mini-track img {
   width: 80px;
-  height: 80px;
+  height: 87px;
   object-fit: cover;
   border-radius: 10px;
 }
