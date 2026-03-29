@@ -245,27 +245,20 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
-    fetch(URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        nama: nama,
-        pesan: pesan
-      })
-    })
-    .then(() => {
-      alert("Berhasil dikirim 🤍");
+const formData = new FormData();
+formData.append("nama", nama);
+formData.append("pesan", pesan);
 
-      inputNama.value = "";
-      inputPesan.value = "";
+fetch(URL, {
+  method: "POST",
+  body: formData
+})
+.then(() => {
+  alert("Berhasil dikirim 🤍");
 
-      loadKomentar();
-    })
-    .catch(err => console.error("Post error:", err));
-  });
+  inputNama.value = "";
+  inputPesan.value = "";
 
   loadKomentar();
-
-});
+})
+.catch(err => console.error("Post error:", err));
