@@ -70,7 +70,7 @@ if (slides2.length > 0) {
     slides2[index2].classList.remove("active");
     index2 = (index2 + 1) % slides2.length;
     slides2[index2].classList.add("active");
-  }, 3000);
+  }, 2000);
 }
 
 function triggerHalaman2Animasi() {
@@ -91,7 +91,7 @@ if (slide3.length > 0) {
     slide3[index3].classList.remove("active");
     index3 = (index3 + 1) % slide3.length;
     slide3[index3].classList.add("active");
-  }, 4000);
+  }, 3000);
 }
 
 
@@ -106,7 +106,7 @@ if (slide4.length > 0) {
     slide4[index4].classList.remove("active");
     index4 = (index4 + 1) % slide4.length;
     slide4[index4].classList.add("active");
-  }, 4000);
+  }, 800);
 }
 
 
@@ -175,6 +175,7 @@ window.addEventListener("scroll", () => {
    KOMENTAR SYSTEM
 ========================= */
 document.addEventListener("DOMContentLoaded", function () {
+  const statusKirim = document.getElementById("status-kirim");
   let currentPage = 1;
 const perPage = 10;
 let allData = [];
@@ -263,43 +264,55 @@ document.getElementById("prev").addEventListener("click", () => {
   /* =========================
      KIRIM KOMENTAR
   ========================= */
-  tombol.addEventListener("click", function () {
+tombol.addEventListener("click", function () {
 
-    const inputNama = document.querySelector('input[placeholder="Nama"]');
-    const inputPesan = document.querySelector('textarea');
+  const inputNama = document.querySelector('input[placeholder="Nama"]');
+  const inputPesan = document.querySelector('textarea');
 
-    if (!inputNama || !inputPesan) {
-      alert("Form tidak ditemukan");
-      return;
-    }
+  if (!inputNama || !inputPesan) {
+    alert("Form tidak ditemukan");
+    return;
+  }
 
-    const nama = inputNama.value.trim();
-    const pesan = inputPesan.value.trim();
+  const nama = inputNama.value.trim();
+  const pesan = inputPesan.value.trim();
 
-    if (nama === "" || pesan === "") {
-      alert("Isi dulu ya 😊");
-      return;
-    }
+  if (nama === "" || pesan === "") {
+    alert("Isi dulu ya 😊");
+    return;
+  }
 
-    const formData = new FormData();
-    formData.append("nama", nama);
-    formData.append("pesan", pesan);
+  const formData = new FormData();
+  formData.append("nama", nama);
+  formData.append("pesan", pesan);
 
-    fetch(URL, {
-      method: "POST",
-      body: formData
-    })
-    .then(() => {
-      alert("Berhasil dikirim 🤍");
+  // 🔥 tampilkan loading dulu
+  statusKirim.innerHTML = '<span class="loading">Mengirim</span>';
 
-      inputNama.value = "";
-      inputPesan.value = "";
+  fetch(URL, {
+    method: "POST",
+    body: formData
+  })
+  .then(() => {
 
-      loadKomentar();
-    })
-    .catch(err => console.error("Post error:", err));
+    statusKirim.innerHTML = '<span class="success">Thanks for your comment! 🤍</span>';
 
+    inputNama.value = "";
+    inputPesan.value = "";
+
+    loadKomentar();
+
+    setTimeout(() => {
+      statusKirim.innerHTML = "";
+    }, 3000);
+
+  })
+  .catch(err => {
+    console.error("Post error:", err);
+    statusKirim.innerHTML = '<span style="color:red;">Gagal mengirim</span>';
   });
+
+});
 
   loadKomentar();
 

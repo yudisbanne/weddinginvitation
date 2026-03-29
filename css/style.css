@@ -21,6 +21,7 @@ body, html {
   padding: 0;
   font-family: 'Segoe UI', sans-serif;
   height: 100%;
+    background: black;
 }
 
 .cover {
@@ -90,11 +91,12 @@ body, html {
   height: 100dvh;
   position: relative;
   overflow: hidden;
-
+  background: black;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
+  margin-bottom: 7px;
 }
 
 /* SLIDE BACKGROUND */
@@ -215,18 +217,46 @@ body, html {
 /* HALAMAN 3 */
 .halaman3 {
   height: 100dvh;
-  background: black;
   display: flex;
   flex-direction: column;
-  gap: 9px;
+  background: black;
+  overflow: hidden;
 }
 
-/* BOX 1 (SLIDE) */
+/* =========================
+   30% TEKS (BOX 3)
+========================= */
+.box3 {
+  height: 30%;
+  color: white;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* 🔥 biar tengah vertikal */
+  padding: 10px;
+}
+
+/* NAMA */
+.names3 {
+  font-family: 'Alex Brush', cursive;
+  font-size: 28px;
+  margin-bottom: 0px;
+}
+
+.box3 p {
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+
+/* =========================
+   40% SLIDE (BOX 1)
+========================= */
 .box1 {
-  flex: 5; /* besar */
-  margin-top: 7px;
+  height: 40%;
   position: relative;
   overflow: hidden;
+  margin-top: 0px;
 }
 
 .slide3 {
@@ -243,21 +273,25 @@ body, html {
   opacity: 1;
 }
 
-/* BOX 2 (MINI FOTO) */
+
+/* =========================
+   30% MINI FOTO (BOX 2)
+========================= */
 .box2 {
-  flex: 1.5; /* paling kecil */
-  overflow: hidden;
+  height: 30%;
   display: flex;
   align-items: center;
-  padding-bottom: 15px;
+  overflow: hidden;
 }
 
+/* track jalan */
 .mini-track {
   display: flex;
   gap: 10px;
   animation: slideLeft 12s linear infinite;
 }
 
+/* ukuran foto */
 .mini-track img {
   width: 80px;
   height: 80px;
@@ -265,31 +299,10 @@ body, html {
   border-radius: 10px;
 }
 
-/* ANIMASI */
+/* animasi */
 @keyframes slideLeft {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
-}
-
-/* BOX 3 (AYAT) */
-.box3 {
-  flex: 2.5; /* sedang */
-  color: white;
-  text-align: center;
-  margin-top: 10px;
-
-}
-/* NAMA */
-.names3 {
-  font-family: 'Alex Brush', cursive;
-  font-size: 28px;
-  margin-top: 7px;
-  margin-bottom: 10px;
-}
-
-.box3 p {
-  font-size: 13px;
-  line-height: 1.6;
 }
 
 
@@ -339,7 +352,7 @@ body, html {
   letter-spacing: 2px;
   margin-top: 2px;
   margin-bottom: 8px; /* sebelumnya 20px */
-  font-size: 22px;
+  font-size: 18px;
 }
 
 /* TANGGAL */
@@ -401,7 +414,7 @@ body, html {
 .tempat4 {
   font-family: 'Poppins', sans-serif !important;
   font-weight: 600;
-  font-size: 15px;
+  font-size: 14px;
   margin-top: 4px;
   margin-bottom: 3px;
 }
@@ -465,7 +478,7 @@ body.lock-scroll {
   font-family: 'Playfair Display', serif;
   font-weight: 600;
   margin-top: 2px;
-  font-size: 22px;
+  font-size: 18px;
   margin-bottom: 10px;
 }
 
@@ -476,16 +489,10 @@ body.lock-scroll {
   margin: 15px 0;
 }
 
-
-.waktu {
-  font-size: 16px;
-  margin-bottom: 10px;
-}
-
 .tempatresepsi {
   font-family: 'Poppins', sans-serif !important;
   font-weight: 600;
-  font-size: 16px;
+  font-size: 14px;
   margin-top: 6px;
   margin-bottom: 4px;
 }
@@ -523,8 +530,8 @@ body.lock-scroll {
 }
 
 .subtext {
-  font-size: 12px;
-  color: #777;
+  font-size: 13px;
+  color: #282828;
   text-align: center;
 }
 
@@ -558,7 +565,7 @@ body.lock-scroll {
   padding: 10px;
   border: none;
   font-weight: 500;
-  margin-bottom: 5px;
+  margin-bottom: 2px;
 }
 
 .btn-kirim:hover {
@@ -582,21 +589,20 @@ body.lock-scroll {
 }
 
 .nama-komentar {
-  font-weight: 500;
-  font-size: 14px;
-  color: #333;
+  font-weight: 360;
+  font-size: 13px;
+  color: #755600;
 }
 
 .isi-komentar {
   font-size: 12px;
-  color: #666;
+  color: #5b5a5a;
 }
 #list-komentar {
   border-top: 1px solid #eee; /* 🔥 garis atas */
   max-height: 210px; /* kira2 muat 3-4 komentar */
   overflow-y: auto;
   padding-right: 5px;
-  margin-bottom: 0;
   padding-bottom: 0;
   scroll-behavior: smooth;
   box-shadow: inset 0 -10px 10px -10px rgba(0,0,0,0.1);
@@ -624,7 +630,7 @@ body.lock-scroll {
   border-top: 1px solid #eee; /* 🔥 garis pemisah */
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: 4px;
   margin-top: 0px;
 }
 
@@ -642,5 +648,33 @@ body.lock-scroll {
   font-size: 12px;
     margin-top: 7px;
   margin-bottom: 2px;
+}
+.status-kirim {
+  text-align: center;
+  font-size: 13px;
+  margin: 4px 0;
+  height: 10px;
+}
+
+/* loading animasi */
+.loading {
+  color: #999;
+}
+
+.loading::after {
+  content: "...";
+  animation: dots 1s infinite;
+}
+
+@keyframes dots {
+  0% { content: "."; }
+  33% { content: ".."; }
+  66% { content: "..."; }
+}
+
+/* sukses */
+.success {
+  color: #28a745; /* hijau */
+  font-weight: 500;
 }
 /* end of halaman ucapan */
