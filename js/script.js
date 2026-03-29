@@ -175,6 +175,31 @@ window.addEventListener("scroll", () => {
    KOMENTAR SYSTEM
    
 ========================= */
+function formatWaktuRelative(date) {
+  const now = new Date();
+  const selisih = now - date;
+
+  const detik = Math.floor(selisih / 1000);
+  const menit = Math.floor(detik / 60);
+  const jam = Math.floor(menit / 60);
+  const hari = Math.floor(jam / 24);
+  const bulan = Math.floor(hari / 30);
+  const tahun = Math.floor(bulan / 12);
+
+  if (tahun > 0) return `${tahun} year${tahun > 1 ? 's' : ''} ago`;
+
+  if (bulan > 0) {
+    const sisaHari = hari % 30;
+    return `${bulan} month${bulan > 1 ? 's' : ''}${sisaHari > 0 ? ' ' + sisaHari + ' day' + (sisaHari > 1 ? 's' : '') : ''} ago`;
+  }
+
+  if (hari > 0) return `${hari} day${hari > 1 ? 's' : ''} ago`;
+  if (jam > 0) return `${jam} hour${jam > 1 ? 's' : ''} ago`;
+  if (menit > 0) return `${menit} minute${menit > 1 ? 's' : ''} ago`;
+
+  return `just now`;
+}
+
 const btnKirim = document.getElementById('btnKirim');
 const listKomentar = document.getElementById('listKomentar');
 const countKomentar = document.getElementById('count');
@@ -183,7 +208,10 @@ const prevBtn = document.getElementById('prev');
 const nextBtn = document.getElementById('next');
 const pageInfo = document.getElementById('pageInfo');
 
-let komentarData = []; // array komentar
+let komentarData = JSON.parse(localStorage.getItem('komentarData')) || [];
+function simpanKomentar() {
+  localStorage.setItem('komentarData', JSON.stringify(komentarData));
+}// array komentar
 let currentPage = 1;
 const perPage = 10; // tiap page maksimal 10 komentar
 const scrollLimit = 3; // tampilkan 3 komentar pertama, sisanya scroll
@@ -191,19 +219,40 @@ const scrollLimit = 3; // tampilkan 3 komentar pertama, sisanya scroll
 btnKirim.addEventListener('click', () => {
   const nama = document.getElementById('inputNama').value.trim();
   const pesan = document.getElementById('inputPesan').value.trim();
-  if(!nama || !pesan) {
+
+  if (!nama || !pesan) {
     statusKirim.textContent = "Nama dan ucapan tidak boleh kosong!";
+    statusKirim.className = "status-kirim";
     return;
   }
 
-  const waktu = new Date().toLocaleString();
-  komentarData.push({nama, pesan, waktu});
+  // 🔥 TAMPILKAN ANIMASI SENDING
+  statusKirim.textContent = "Sending your wishes";
+  statusKirim.className = "status-kirim sending";
 
-  document.getElementById('inputNama').value = '';
-  document.getElementById('inputPesan').value = '';
-  statusKirim.textContent = "Ucapan terkirim!";
-  currentPage = Math.ceil(komentarData.length / perPage); // otomatis ke page terakhir
-  renderKomentar();
+  // ⏳ SIMULASI DELAY (biar terasa real)
+  setTimeout(() => {
+    const waktu = new Date();
+    komentarData.push({ nama, pesan, waktu });
+    simpanKomentar();
+
+    document.getElementById('inputNama').value = '';
+    document.getElementById('inputPesan').value = '';
+
+    // ✅ SUCCESS MESSAGE
+    statusKirim.textContent = "Your wishes have been sent 🤍";
+    statusKirim.className = "status-kirim success";
+
+    currentPage = Math.ceil(komentarData.length / perPage);
+    renderKomentar();
+
+    // ⏳ Hilangkan pesan setelah 3 detik
+    setTimeout(() => {
+      statusKirim.textContent = "";
+      statusKirim.className = "status-kirim";
+    }, 3000);
+
+  }, 1200); // delay 1.2 detik biar smooth
 });
 
 function renderKomentar() {
@@ -224,7 +273,7 @@ function renderKomentar() {
     div.innerHTML = `
       <div class="nama-komentar">${k.nama}</div>
       <div class="isi-komentar">${k.pesan}</div>
-      <div class="waktu-komentar">${k.waktu}</div>
+     <div class="waktu-komentar">${formatWaktuRelative(new Date(k.waktu))}</div>
     `;
 
     // jika lebih dari scrollLimit, beri scroll
