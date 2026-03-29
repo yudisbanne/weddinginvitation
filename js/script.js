@@ -173,147 +173,86 @@ window.addEventListener("scroll", () => {
 
 /* =========================
    KOMENTAR SYSTEM
+   
 ========================= */
-document.addEventListener("DOMContentLoaded", function () {
-  const statusKirim = document.getElementById("status-kirim");
-  let currentPage = 1;
-const perPage = 10;
-let allData = [];
+const btnKirim = document.getElementById('btnKirim');
+const listKomentar = document.getElementById('listKomentar');
+const countKomentar = document.getElementById('count');
+const statusKirim = document.getElementById('statusKirim');
+const prevBtn = document.getElementById('prev');
+const nextBtn = document.getElementById('next');
+const pageInfo = document.getElementById('pageInfo');
 
-  const URL = "https://script.google.com/macros/s/AKfycbxhnt3RkxOO2N4enbI0hghpesV79PnKpz6LabHQBtiOoTNwXvlevrkjYcppQNmlmg_l/exec";
+let komentarData = []; // array komentar
+let currentPage = 1;
+const perPage = 10; // tiap page maksimal 10 komentar
+const scrollLimit = 3; // tampilkan 3 komentar pertama, sisanya scroll
 
-  const tombol = document.querySelector(".btn-kirim");
-  const listKomentar = document.getElementById("list-komentar");
-  const count = document.getElementById("count");
-
-  if (!tombol || !listKomentar || !count) {
-    console.error("Elemen komentar tidak ditemukan");
+btnKirim.addEventListener('click', () => {
+  const nama = document.getElementById('inputNama').value.trim();
+  const pesan = document.getElementById('inputPesan').value.trim();
+  if(!nama || !pesan) {
+    statusKirim.textContent = "Nama dan ucapan tidak boleh kosong!";
     return;
   }
 
-  /* =========================
-     FORMAT WAKTU
-  ========================= */
-  function formatWaktu(waktu) {
-    const now = new Date();
-    const past = new Date(waktu);
-    const diff = (now - past) / 1000;
+  const waktu = new Date().toLocaleString();
+  komentarData.push({nama, pesan, waktu});
 
-    if (diff < 60) return "Baru saja";
-    if (diff < 3600) return Math.floor(diff / 60) + " menit lalu";
-    if (diff < 86400) return Math.floor(diff / 3600) + " jam lalu";
-    if (diff < 604800) return Math.floor(diff / 86400) + " hari lalu";
-    if (diff < 2592000) return Math.floor(diff / 604800) + " minggu lalu";
-    if (diff < 31536000) return Math.floor(diff / 2592000) + " bulan lalu";
+  document.getElementById('inputNama').value = '';
+  document.getElementById('inputPesan').value = '';
+  statusKirim.textContent = "Ucapan terkirim!";
+  currentPage = Math.ceil(komentarData.length / perPage); // otomatis ke page terakhir
+  renderKomentar();
+});
 
-    return Math.floor(diff / 31536000) + " tahun lalu";
-  }
-
-  /* =========================
-     LOAD KOMENTAR
-  ========================= */
-  function loadKomentar() {
-  fetch(URL)
-    .then(res => res.json())
-    .then(data => {
-
-      allData = data.reverse();
-      renderKomentar();
-
-      count.innerText = allData.length;
-    });
-}
 function renderKomentar() {
-  listKomentar.innerHTML = "";
+  const totalPage = Math.ceil(komentarData.length / perPage) || 1;
+  pageInfo.textContent = `${currentPage} / ${totalPage}`;
 
-  const start = (currentPage - 1) * perPage;
+  // ambil data sesuai page
+  const start = (currentPage-1) * perPage;
   const end = start + perPage;
+  const pageKomentar = komentarData.slice(start, end);
 
-  const pageData = allData.slice(start, end);
-
-  pageData.forEach(item => {
-    const div = document.createElement("div");
-    div.classList.add("item-komentar");
-
-    const waktu = formatWaktu(item.waktu);
+  // bikin list HTML
+  listKomentar.innerHTML = '';
+  pageKomentar.forEach((k, idx) => {
+    const div = document.createElement('div');
+    div.classList.add('item-komentar');
 
     div.innerHTML = `
-      <div class="nama-komentar"><strong>${item.nama}</strong></div>
-      <div class="isi-komentar">${item.pesan}</div>
-      <div class="waktu-komentar">🕒 ${waktu}</div>
+      <div class="nama-komentar">${k.nama}</div>
+      <div class="isi-komentar">${k.pesan}</div>
+      <div class="waktu-komentar">${k.waktu}</div>
     `;
 
+    // jika lebih dari scrollLimit, beri scroll
+    if(idx >= scrollLimit) {
+      div.style.display = 'block';
+    }
     listKomentar.appendChild(div);
   });
 
-  document.getElementById("page-info").innerText = currentPage;
+  // batasi tinggi scroll jika komentar > scrollLimit
+  if(pageKomentar.length > scrollLimit) {
+    listKomentar.style.maxHeight = '220px';
+    listKomentar.style.overflowY = 'auto';
+  } else {
+    listKomentar.style.maxHeight = 'none';
+    listKomentar.style.overflowY = 'visible';
+  }
+
+  countKomentar.textContent = komentarData.length;
 }
-document.getElementById("next").addEventListener("click", () => {
-  if (currentPage * perPage < allData.length) {
-    currentPage++;
-    renderKomentar();
-  }
+
+prevBtn.addEventListener('click', () => {
+  if(currentPage > 1) { currentPage--; renderKomentar(); }
+});
+nextBtn.addEventListener('click', () => {
+  const totalPage = Math.ceil(komentarData.length / perPage);
+  if(currentPage < totalPage) { currentPage++; renderKomentar(); }
 });
 
-document.getElementById("prev").addEventListener("click", () => {
-  if (currentPage > 1) {
-    currentPage--;
-    renderKomentar();
-  }
-});
-  /* =========================
-     KIRIM KOMENTAR
-  ========================= */
-tombol.addEventListener("click", function () {
-
-  const inputNama = document.querySelector('input[placeholder="Nama"]');
-  const inputPesan = document.querySelector('textarea');
-
-  if (!inputNama || !inputPesan) {
-    alert("Form tidak ditemukan");
-    return;
-  }
-
-  const nama = inputNama.value.trim();
-  const pesan = inputPesan.value.trim();
-
-  if (nama === "" || pesan === "") {
-    alert("Isi dulu ya 😊");
-    return;
-  }
-
-  const formData = new FormData();
-  formData.append("nama", nama);
-  formData.append("pesan", pesan);
-
-  // 🔥 tampilkan loading dulu
-  statusKirim.innerHTML = '<span class="loading">Mengirim</span>';
-
-  fetch(URL, {
-    method: "POST",
-    body: formData
-  })
-  .then(() => {
-
-    statusKirim.innerHTML = '<span class="success">Thanks for your comment! 🤍</span>';
-
-    inputNama.value = "";
-    inputPesan.value = "";
-
-    loadKomentar();
-
-    setTimeout(() => {
-      statusKirim.innerHTML = "";
-    }, 3000);
-
-  })
-  .catch(err => {
-    console.error("Post error:", err);
-    statusKirim.innerHTML = '<span style="color:red;">Gagal mengirim</span>';
-  });
-
-});
-
-  loadKomentar();
-
-});
+// render pertama
+renderKomentar();

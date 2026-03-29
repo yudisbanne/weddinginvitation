@@ -12,7 +12,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="js/script.js">
 </head>
 
 <body>
@@ -201,37 +200,38 @@
   </div>
 
 </section>
-<section class="komentar">
-  <div class="container">
-    <div class="card shadow-sm border-0 p-4 komentar-card">
+<!-- end pemberkatan -->
 
-      <h5 class="text-center mb-2 title-wedding">Best Wishes 🤍</h5>
-      <p class="subtext mb-3">Berikan Ucapan & Doa Restu</p>
-      <input type="text" class="form-control mb-3 input-custom" placeholder="Nama">
+<!-- Ucapan -->
+<!-- HALAMAN UCAPAN -->
+<section class="komentar-section">
+  <div class="komentar-card">
+    <h3 class="judul-komentar">Best Wishes 🤍</h3>
+    <p class="subtext-komentar">Berikan ucapan & doa restu</p>
 
-      <textarea class="form-control mb-2 input-custom" rows="3" placeholder="Tulis ucapan dan doa..."></textarea>
+    <!-- Form komentar -->
+    <input type="text" id="inputNama" class="input-komentar" placeholder="Nama">
+    <textarea id="inputPesan" class="textarea-komentar" rows="4" placeholder="Tulis ucapan dan doa..."></textarea>
+    <button id="btnKirim" class="btn-komentar">Kirim</button>
 
-      <button class="btn btn-kirim w-100">Kirim</button>
+    <!-- Status kirim -->
+    <div id="statusKirim" class="status-kirim"></div>
 
-      <!-- Jumlah komentar -->
-      <p class="jumlah-komentar"><span id="count">0</span> Komentar</p>
+    <!-- Jumlah komentar -->
+    <p class="jumlah-komentar">Jumlah komentar: <span id="count">0</span></p>
 
-      <hr class="garis-komentar">
+    <!-- List komentar -->
+    <div id="listKomentar" class="list-komentar"></div>
 
-      <!-- List komentar -->
-      <div id="status-kirim" class="status-kirim"></div>
-      <div id="list-komentar"></div>
-      <div class="pagination">
-  <button id="prev">← Prev</button>
-  <span id="page-info">1</span>
-  <button id="next">Next →</button>
-</div>
-
+    <!-- Pagination -->
+    <div class="pagination-komentar">
+      <button id="prev" class="page-btn">← Prev</button>
+      <span id="pageInfo">1</span>
+      <button id="next" class="page-btn">Next →</button>
     </div>
   </div>
 </section>
-
-<!-- end pemberkatan -->
+<!-- end of ucapan -->
 <script src="js/script.js"></script>
 
 
