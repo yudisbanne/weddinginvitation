@@ -218,12 +218,13 @@ body, html {
   background: black;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 9px;
 }
 
 /* BOX 1 (SLIDE) */
 .box1 {
   flex: 5; /* besar */
+  margin-top: 7px;
   position: relative;
   overflow: hidden;
 }
@@ -275,12 +276,14 @@ body, html {
   flex: 2.5; /* sedang */
   color: white;
   text-align: center;
+  margin-top: 10px;
 
 }
 /* NAMA */
 .names3 {
   font-family: 'Alex Brush', cursive;
   font-size: 28px;
+  margin-top: 7px;
   margin-bottom: 10px;
 }
 
@@ -289,9 +292,6 @@ body, html {
   line-height: 1.6;
 }
 
-.box1 { order: 2; } /* slide ke tengah */
-.box2 { order: 3; } /* mini ke bawah */
-.box3 { order: 1; } /* ayat ke atas */
 
 /* HALAMAN 4 */
 
