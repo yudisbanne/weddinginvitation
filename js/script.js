@@ -262,3 +262,9 @@ fetch(URL, {
   loadKomentar();
 })
 .catch(err => console.error("Post error:", err));
+
+}); // ✅ tutup event klik
+
+loadKomentar();
+
+}); // ✅ tutup DOMContentLoaded
