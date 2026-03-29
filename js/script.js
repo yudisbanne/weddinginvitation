@@ -2,7 +2,9 @@
    GLOBAL ELEMENT
 ========================= */
 const musik = document.getElementById("musik");
-
+// pemanggilan link ucapan
+const API_URL = "https://script.google.com/macros/s/AKfycbzJsHO_VlUhzt-gipYnzcu_X3J3cVXNRpl1ofGNHECFuhUgaPRiwSnb9tAoZD9Pf0U3/exec";
+// end pemanggilan
 
 /* =========================
    RESET SAAT LOAD
@@ -207,11 +209,8 @@ const statusKirim = document.getElementById('statusKirim');
 const prevBtn = document.getElementById('prev');
 const nextBtn = document.getElementById('next');
 const pageInfo = document.getElementById('pageInfo');
+let komentarData = [];
 
-let komentarData = JSON.parse(localStorage.getItem('komentarData')) || [];
-function simpanKomentar() {
-  localStorage.setItem('komentarData', JSON.stringify(komentarData));
-}// array komentar
 let currentPage = 1;
 const perPage = 10; // tiap page maksimal 10 komentar
 const scrollLimit = 3; // tampilkan 3 komentar pertama, sisanya scroll
@@ -226,33 +225,35 @@ btnKirim.addEventListener('click', () => {
     return;
   }
 
-  // 🔥 TAMPILKAN ANIMASI SENDING
-  statusKirim.textContent = "Sending your wishes";
+  // 🔥 animasi kirim
+  statusKirim.textContent = "Sending your wishes...";
   statusKirim.className = "status-kirim sending";
 
-  // ⏳ SIMULASI DELAY (biar terasa real)
-  setTimeout(() => {
-    const waktu = new Date();
-    komentarData.push({ nama, pesan, waktu });
-    simpanKomentar();
-
+  fetch(API_URL, {
+    method: "POST",
+    body: JSON.stringify({
+      nama: nama,
+      pesan: pesan
+    })
+  })
+  .then(() => {
     document.getElementById('inputNama').value = '';
     document.getElementById('inputPesan').value = '';
 
-    // ✅ SUCCESS MESSAGE
     statusKirim.textContent = "Your wishes have been sent 🤍";
     statusKirim.className = "status-kirim success";
 
-    currentPage = Math.ceil(komentarData.length / perPage);
-    renderKomentar();
+    loadKomentar();
 
-    // ⏳ Hilangkan pesan setelah 3 detik
     setTimeout(() => {
       statusKirim.textContent = "";
       statusKirim.className = "status-kirim";
-    }, 3000);
-
-  }, 1200); // delay 1.2 detik biar smooth
+    }, 2000);
+  })
+  .catch(() => {
+    statusKirim.textContent = "Gagal mengirim, coba lagi!";
+    statusKirim.className = "status-kirim";
+  });
 });
 
 function renderKomentar() {
@@ -304,4 +305,16 @@ nextBtn.addEventListener('click', () => {
 });
 
 // render pertama
-renderKomentar();
+function loadKomentar() {
+  fetch(API_URL)
+    .then(res => res.json())
+    .then(data => {
+      komentarData = data.reverse();
+      renderKomentar();
+    })
+    .catch(() => {
+      console.log("Gagal load komentar");
+    });
+}
+loadKomentar();
+setInterval(loadKomentar, 2000);
