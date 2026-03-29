@@ -188,3 +188,84 @@ window.addEventListener("scroll", () => {
     }
   });
 });
+
+// komentar
+document.addEventListener("DOMContentLoaded", function () {
+
+  const URL = "https://script.google.com/macros/s/AKfycbxhnt3RkxOO2N4enbI0hghpesV79PnKpz6LabHQBtiOoTNwXvlevrkjYcppQNmlmg_l/exec";
+
+  const tombol = document.querySelector(".btn-kirim");
+  const listKomentar = document.getElementById("list-komentar");
+  const count = document.getElementById("count");
+
+  if (!tombol || !listKomentar || !count) {
+    console.error("Elemen komentar tidak ditemukan");
+    return;
+  }
+
+  function loadKomentar() {
+    fetch(URL)
+      .then(res => res.json())
+      .then(data => {
+
+        listKomentar.innerHTML = "";
+
+        data.reverse().forEach(item => {
+          const div = document.createElement("div");
+          div.classList.add("item-komentar");
+
+          div.innerHTML = `
+            <div class="nama-komentar">${item.nama}</div>
+            <div class="isi-komentar">${item.pesan}</div>
+          `;
+
+          listKomentar.appendChild(div);
+        });
+
+        count.innerText = data.length;
+      })
+      .catch(err => console.error("Load error:", err));
+  }
+
+  tombol.addEventListener("click", function () {
+
+    const inputNama = document.querySelector('input[placeholder="Nama"]');
+    const inputPesan = document.querySelector('textarea');
+
+    if (!inputNama || !inputPesan) {
+      alert("Form tidak ditemukan");
+      return;
+    }
+
+    const nama = inputNama.value;
+    const pesan = inputPesan.value;
+
+    if (nama === "" || pesan === "") {
+      alert("Isi dulu ya 😊");
+      return;
+    }
+
+    fetch(URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        nama: nama,
+        pesan: pesan
+      })
+    })
+    .then(() => {
+      alert("Berhasil dikirim 🤍");
+
+      inputNama.value = "";
+      inputPesan.value = "";
+
+      loadKomentar();
+    })
+    .catch(err => console.error("Post error:", err));
+  });
+
+  loadKomentar();
+
+});
