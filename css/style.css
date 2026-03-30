@@ -1,3 +1,9 @@
+/* font alternative halaman 2 */
+@font-face {
+  font-family: 'BrookeSmithScript';
+  src: url('../asset/font/BrookeSmithScript.ttf') format('truetype');
+  font-display: swap;
+}
 /* ANIMASI ZOOM HALUS */
 @keyframes zoomInSmooth {
   0% {
@@ -95,6 +101,7 @@ html {
 }
 
 /* HALAMAN 2 */
+
 .halaman2 {
   height: 100dvh;
   position: relative;
@@ -145,12 +152,13 @@ html {
 }
 
 /* NAMA */
-.names2 {
-  font-family: 'Dancing Script';
-  font-size: 44px;
-  margin-bottom: 15px;
-  color: white;
-}
+  .names2 {
+    font-family: 'BrookeSmithScript';
+    font-size: 55px;
+    font-weight: 470;
+    margin-bottom: 15px;
+    color: white;
+  }
 
 /* SUBTITLE */
 .subtitle {
@@ -602,8 +610,8 @@ body.lock-scroll {
 
 .judul-komentar {
   font-family: 'Alex Brush', cursive;
-  font-size: 38px;
-  font-weight: 500;
+  font-size: 48px;
+  font-weight: 570;
   text-align: center;
   color: #8b7e54;
   margin-bottom: 8px;
