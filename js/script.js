@@ -189,6 +189,7 @@ function checkScroll() {
 
 window.addEventListener('scroll', checkScroll);
 window.addEventListener('load', checkScroll);
+
 // Animasi slide gambar halaman3
 let index = 0;
 const slides = document.querySelectorAll('.cinematic-slider img');
@@ -231,6 +232,7 @@ function formatWaktuRelative(date) {
   return `just now`;
 }
 
+// ambil element
 const btnKirim = document.getElementById('btnKirim');
 const listKomentar = document.getElementById('listKomentar');
 const countKomentar = document.getElementById('count');
@@ -238,114 +240,114 @@ const statusKirim = document.getElementById('statusKirim');
 const prevBtn = document.getElementById('prev');
 const nextBtn = document.getElementById('next');
 const pageInfo = document.getElementById('pageInfo');
+
 let komentarData = [];
-
 let currentPage = 1;
-const perPage = 10; // tiap page maksimal 10 komentar
-const scrollLimit = 3; // tampilkan 3 komentar pertama, sisanya scroll
+const perPage = 10;
 
-btnKirim.addEventListener('click', () => {
-  const nama = document.getElementById('inputNama').value.trim();
-  const pesan = document.getElementById('inputPesan').value.trim();
+// 🔥 JANGAN JALANKAN JIKA ELEMENT TIDAK ADA
+if (listKomentar) {
 
-  if (!nama || !pesan) {
-    statusKirim.textContent = "Nama dan ucapan tidak boleh kosong!";
-    statusKirim.className = "status-kirim";
-    return;
-  }
+ function renderKomentar() {
+  listKomentar.innerHTML = '';
 
-  // 🔥 animasi kirim
-  statusKirim.textContent = "Sending your wishes...";
-  statusKirim.className = "status-kirim sending";
-
-  fetch(API_URL, {
-    method: "POST",
-    body: JSON.stringify({
-      nama: nama,
-      pesan: pesan
-    })
-  })
-  .then(() => {
-    document.getElementById('inputNama').value = '';
-    document.getElementById('inputPesan').value = '';
-
-    statusKirim.textContent = "Your wishes have been sent 🤍";
-    statusKirim.className = "status-kirim success";
-
-    loadKomentar();
-
-    setTimeout(() => {
-      statusKirim.textContent = "";
-      statusKirim.className = "status-kirim";
-    }, 2000);
-  })
-  .catch(() => {
-    statusKirim.textContent = "Gagal mengirim, coba lagi!";
-    statusKirim.className = "status-kirim";
-  });
-});
-
-function renderKomentar() {
   const totalPage = Math.ceil(komentarData.length / perPage) || 1;
   pageInfo.textContent = `${currentPage} / ${totalPage}`;
 
-  // ambil data sesuai page
-  const start = (currentPage-1) * perPage;
+  const start = (currentPage - 1) * perPage;
   const end = start + perPage;
   const pageKomentar = komentarData.slice(start, end);
 
-  // bikin list HTML
-  listKomentar.innerHTML = '';
-  pageKomentar.forEach((k, idx) => {
+  pageKomentar.forEach((k) => {
     const div = document.createElement('div');
     div.classList.add('item-komentar');
 
     div.innerHTML = `
-      <div class="nama-komentar">${k.nama}</div>
+      <div class="nama-komentar"><b>${k.nama}</b></div>
       <div class="isi-komentar">${k.pesan}</div>
-     <div class="waktu-komentar">${formatWaktuRelative(new Date(k.waktu))}</div>
+      <div class="waktu-komentar">${formatWaktuRelative(new Date(k.waktu))}</div>
     `;
 
-    // jika lebih dari scrollLimit, beri scroll
-    if(idx >= scrollLimit) {
-      div.style.display = 'block';
-    }
     listKomentar.appendChild(div);
   });
 
-  // batasi tinggi scroll jika komentar > scrollLimit
-  if(pageKomentar.length > scrollLimit) {
-    listKomentar.style.maxHeight = '220px';
+  // 🔥 KUNCI UTAMA DI SINI
+  if (pageKomentar.length > 2) {
+    listKomentar.style.maxHeight = '140px'; // kira2 tinggi 2 komentar
     listKomentar.style.overflowY = 'auto';
   } else {
     listKomentar.style.maxHeight = 'none';
     listKomentar.style.overflowY = 'visible';
+
+    listKomentar.classList.remove('scroll-active');
   }
 
   countKomentar.textContent = komentarData.length;
 }
 
-prevBtn.addEventListener('click', () => {
-  if(currentPage > 1) { currentPage--; renderKomentar(); }
-});
-nextBtn.addEventListener('click', () => {
-  const totalPage = Math.ceil(komentarData.length / perPage);
-  if(currentPage < totalPage) { currentPage++; renderKomentar(); }
-});
+  function loadKomentar() {
+    fetch(API_URL)
+      .then(res => res.json())
+      .then(data => {
+        komentarData = data.reverse();
+        renderKomentar();
+      })
+      .catch(() => console.log("Gagal load komentar"));
+  }
 
-// render pertama
-function loadKomentar() {
-  fetch(API_URL)
-    .then(res => res.json())
-    .then(data => {
-      komentarData = data.reverse();
-      renderKomentar();
-    })
-    .catch(() => {
-      console.log("Gagal load komentar");
+  // tombol kirim
+  if (btnKirim) {
+    btnKirim.addEventListener('click', () => {
+      const nama = document.getElementById('inputNama').value.trim();
+      const pesan = document.getElementById('inputPesan').value.trim();
+
+      if (!nama || !pesan) {
+        statusKirim.textContent = "Nama dan ucapan tidak boleh kosong!";
+        return;
+      }
+
+      statusKirim.textContent = "Sending...";
+      statusKirim.className = "status-kirim sending";
+
+      fetch(API_URL, {
+        method: "POST",
+        body: JSON.stringify({ nama, pesan })
+      })
+      .then(() => {
+        statusKirim.textContent = "Thanks for your comment!";
+        statusKirim.className = "status-kirim success";
+
+        document.getElementById('inputNama').value = '';
+        document.getElementById('inputPesan').value = '';
+
+        loadKomentar();
+      })
+      .catch(() => {
+        statusKirim.textContent = "Gagal kirim!";
+      });
     });
+  }
+
+  // pagination
+  if (prevBtn) {
+    prevBtn.onclick = () => {
+      if (currentPage > 1) {
+        currentPage--;
+        renderKomentar();
+      }
+    };
+  }
+
+  if (nextBtn) {
+    nextBtn.onclick = () => {
+      const totalPage = Math.ceil(komentarData.length / perPage);
+      if (currentPage < totalPage) {
+        currentPage++;
+        renderKomentar();
+      }
+    };
+  }
+
+  loadKomentar();
+  setInterval(loadKomentar, 5000);
 }
-loadKomentar();
-setInterval(loadKomentar, 2000);
-
-
