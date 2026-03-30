@@ -171,6 +171,35 @@ window.addEventListener("scroll", () => {
     }
   });
 });
+// halaman 3
+// animasi teks
+const elements = document.querySelectorAll('.scroll-animate');
+
+function checkScroll() {
+  const triggerBottom = window.innerHeight * 0.85;
+
+  elements.forEach(el => {
+    const boxTop = el.getBoundingClientRect().top;
+
+    if (boxTop < triggerBottom) {
+      el.classList.add('show');
+    }
+  });
+}
+
+window.addEventListener('scroll', checkScroll);
+window.addEventListener('load', checkScroll);
+// Animasi slide gambar halaman3
+let index = 0;
+const slides = document.querySelectorAll('.cinematic-slider img');
+
+setInterval(() => {
+  slides[index].classList.remove('active');
+
+  index = (index + 1) % slides.length;
+
+  slides[index].classList.add('active');
+}, 4400); 
 
 
 /* =========================
@@ -318,3 +347,5 @@ function loadKomentar() {
 }
 loadKomentar();
 setInterval(loadKomentar, 2000);
+
+
