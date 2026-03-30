@@ -524,7 +524,7 @@ body.lock-scroll {
 /* Resepsi */
 .resepsi {
   height: 100dvh;
-   background: #ffffff;
+  background: #ffffff;
   /* warna cream seperti contoh */
   display: flex;
   justify-content: center;
@@ -814,9 +814,10 @@ body.lock-scroll {
 
 /* tanda kasih */
 .tanda-kasih {
-    background: #e5f2f4;
+  background: #e5f2f4;
   backdrop-filter: blur(6px);
-  padding: 30px 20px;
+  padding: 22px 20px;
+
 }
 
 .card-kasih {
@@ -876,7 +877,7 @@ body.lock-scroll {
 .deskripsi-kasih {
   font-family: 'Poppins', cursive, sans-serif;
   letter-spacing: 0.3px;
-  font-size: 15px;
+  font-size: 13px;
   opacity: 0.9;
   font-weight: 300;
 }
@@ -884,43 +885,82 @@ body.lock-scroll {
 /* Card rekening */
 .rekening-card {
   margin-bottom: 14px;
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(255, 255, 255, 0.2);
   border-radius: 15px;
   padding: 15px;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(19px);
   transition: 0.3s;
+  width: 100%;
 }
 
 .rekening-card:hover {
   transform: translateY(-5px);
 }
 
-/* Text */
+/* 🔥 Jarak bank ke nomor dibuat lebih rapat */
 .bank {
-  font-weight: bold;
-  letter-spacing: 2px;
+  font-weight: 500;
+  font-family: 'Poppins', sans-serif !important;
+  margin-bottom: 4px;
+  /* sebelumnya terlalu jauh */
 }
 
-.nama {
-  font-size: 13px;
-  opacity: 0.8;
+/* 🔥 Baris rekening di tengah + rapat */
+.rek-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* center */
+  gap: 6px;
+  /* jarak dekat (1–2 spasi) */
 }
 
-/* Tombol salin */
+/* 🔥 Nomor rekening */
+.rek-row h5 {
+  margin: 0;
+  font-family: 'Poppins', sans-serif !important;
+  font-size: 16px;
+  letter-spacing: 1px;
+  line-height: 1.4;
+  text-align: center;
+
+  word-break: break-all;
+  /* aman untuk HP kecil */
+}
+
+/* 🔥 Tombol icon */
 .btn-salin {
   border: none;
-  background: rgba(255, 255, 255, 0.3);
-  color: #fff;
-  padding: 6px 14px;
-  border-radius: 20px;
-  font-size: 12px;
-  transition: 0.3s;
+  background: transparent;
+  color: white;
+
+  font-size: 17px;
+  padding: 2px;
+
+  cursor: pointer;
+  transition: 0.2s;
 }
 
 .btn-salin:hover {
-  background: rgba(255, 255, 255, 0.5);
+  transform: scale(1.15);
+  color: #ffdede;
 }
 
+.btn-salin:active {
+  transform: scale(0.9);
+}
+
+/* 🔥 Nama pemilik */
+.nama {
+  font-family: 'Open Sans', sans-serif !important;
+  font-size: 13px;
+  opacity: 0.9;
+  margin-top: 4px;
+  margin-bottom: 1px;
+  /* biar dekat ke nomor */
+}
+
+/* 🔥 Toast copy */
 .toast-copy {
   position: fixed;
   bottom: 30px;
@@ -938,19 +978,9 @@ body.lock-scroll {
   z-index: 9999;
 }
 
-/* Saat aktif */
 .toast-copy.show {
   opacity: 1;
   transform: translateX(-50%) translateY(0);
-}
-
-@media (max-width: 576px) {
-  .card-kasih {
-    margin: 0 20px;
-    /* lebih lega di HP */
-    padding: 30px 18px;
-    min-height: 340px;
-  }
 }
 
 /* efek blink */
@@ -1007,8 +1037,8 @@ body.lock-scroll {
 }
 
 .lux-sparkle span:nth-child(5) {
-  top: 59%;
-  left: 47%;
+  top: 63%;
+  left: 41%;
   animation-delay: 3s;
 }
 

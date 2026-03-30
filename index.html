@@ -1,63 +1,66 @@
 <!DOCTYPE html>
 <html lang="id">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Undangan Pernikahan</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Allura&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Undangan Pernikahan</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Allura&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 
 <body>
-<!-- lagu -->
-<audio id="musik" loop>
-  <source src="asset/audio/music1.mp3" type="audio/mpeg">
-</audio>
-<!-- end of lagu -->
+  <!-- lagu -->
+  <audio id="musik" loop>
+    <source src="asset/audio/music1.mp3" type="audio/mpeg">
+  </audio>
+  <!-- end of lagu -->
 
-<div class="cover">
-  <div class="overlay-cover"></div>
+  <div class="cover">
+    <div class="overlay-cover"></div>
 
-  <div class="content">
+    <div class="content">
 
-    <div class="names animate">
-      Yudhistira <br>& <br>Melia
+      <div class="names animate">
+        Yudhistira <br>& <br>Melia
+      </div>
+
+      <div class="guest">
+        <small class="animate">Kepada Yth.</small>
+        <h2 id="namaTamu" class="animate">Bapak/Ibu/Saudara/i</h2>
+
+        <button class="btn-undangan animate" onclick="bukaUndangan()">
+          Buka Undangan
+        </button>
+      </div>
+
     </div>
-
-    <div class="guest">
-      <small class="animate">Kepada Yth.</small>
-      <h2 id="namaTamu" class="animate">Bapak/Ibu/Saudara/i</h2>
-
-     <button class="btn-undangan animate" onclick="bukaUndangan()">
-        Buka Undangan
-      </button>
-    </div>
-
   </div>
-</div>
-<!-- end off halaman 1-->
+  <!-- end off halaman 1-->
 
-<div id="halaman2" class="halaman2">
-<div class="bg-slide active" style="background-image: url('asset/img/bg-2.jpg');"></div>
-<div class="bg-slide" style="background-image: url('asset/img/bg-3.jpg');"></div>
-<div class="bg-slide" style="background-image: url('asset/img/bg-4.jpg');"></div>
-  
-  <div class="isi zoom-out"">
+  <div id="halaman2" class="halaman2">
+    <div class="bg-slide active" style="background-image: url('asset/img/bg-2.jpg');"></div>
+    <div class="bg-slide" style="background-image: url('asset/img/bg-3.jpg');"></div>
+    <div class="bg-slide" style="background-image: url('asset/img/bg-4.jpg');"></div>
+
+    <div class="isi zoom-out"">
     
-    <h1 class="names2 zoom-out"">Yudhistira & Melia</h1><br/>
-    <br/>
-    <p class="subtitle zoom-out"">
+    <h1 class=" names2 zoom-out"">Yudhistira & Melia</h1><br />
+      <br />
+      <p class="subtitle zoom-out"">
       Akan melangsungkan resepsi pernikahan dalam:
     </p>
 
-    <div class="countdown zoom-out"">
+    <div class=" countdown zoom-out"">
       <div class="circle">
         <span id="hari">0</span>
         <small>Hari</small>
@@ -78,233 +81,247 @@
 
   </div>
 
-</div>
-
-<!-- Halaman 3 -->
-<section id="halaman3" class="container text-center py-4">
-  <!-- Nama -->
-  <div class="nama3">
-    Yudi & Melia
   </div>
 
-  <!-- Ayat -->
-  <div class="ayat">
-    "Demikianlah mereka bukan lagi dua, melainkan satu. Karena itu, apa yang telah dipersatukan Allah, tidak boleh diceraikan manusia."
-    <br>
-    <b>Amsal 19:16</b>
-  </div>
-
-  <!-- Slider -->
-  <div id="sliderPage3" class="carousel carousel-fade main-slider" data-bs-ride="carousel" data-bs-interval="3000">
-<div class="cinematic-slider">
-  <img src="asset/img/halaman3/slide1.jpg" class="active">
-  <img src="asset/img/halaman3/slide2.jpg">
-  <img src="asset/img/halaman3/slide3.jpg">
-</div>
-  </div>
-
-  <!-- Track berjalan -->
-  <div class="track-container">
-    <div class="track">
-
-      <img src="asset/img/halaman3/slide1.jpg">
-      <img src="asset/img/halaman3/slide2.jpg">
-      <img src="asset/img/halaman3/slide3.jpg">
-      <img src="asset/img/halaman3/slide1.jpg">
-      <img src="asset/img/halaman3/slide2.jpg">
-      <img src="asset/img/halaman3/slide3.jpg">
-
-      <!-- duplikat -->
-      <img src="asset/img/halaman3/slide1.jpg">
-      <img src="asset/img/halaman3/slide2.jpg">
-      <img src="asset/img/halaman3/slide3.jpg">
-      <img src="asset/img/halaman3/slide1.jpg">
-      <img src="asset/img/halaman3/slide2.jpg">
-      <img src="asset/img/halaman3/slide3.jpg">
-
-    </div>
-  </div>
-
-</section>
-<!-- end of halaman 3 -->
-<div class="halaman4">
-
-  <div class="card-oval">
-
-    <!-- FOTO ATAS -->
-    <div class="img-top" style="background-image: url('asset/img/halaman3/slide1.jpg');"></div>
-
-    <!-- KONTEN -->
-    <div class="content4">
-
-      <p class="title4 fade-up">PEMBERKATAN NIKAH</p>
-
-      <!-- TANGGAL -->
-     <div class="tanggal4 fade-up">
-
-  <div class="hari4">SABTU</div>
-
-  <div class="divider"></div>
-
-  <div class="tgl4">
-    <span class="tgl-besar">26</span>
-    <span>NOV</span>
-    <span>2027</span>
-  </div>
-</div>
-
-  <div class="garis4"></div>
-  <p class="waktupemberkatan fade-up">
-    09:00 WITA - SELESAI
-  </p>
-  <p class="tempat4 fade-up">
-    GEREJA KATOLIK PAROKI RANTEPAO
-  </p>
-
-      <p class="alamat4 fade-up">
-        Jl. Wolter Monginsidi, Rantepao, Toraja Utara
-      </p>
-
-      <a href="https://maps.app.goo.gl/avNRrbmJHccnjucr5" target="_blank" class="btn-map4 fade-up">
-        GOOGLE MAPS
-      </a>
-
+  <!-- Halaman 3 -->
+  <section id="halaman3" class="container text-center py-4">
+    <!-- Nama -->
+    <div class="nama3">
+      Yudi & Melia
     </div>
 
-  </div>
-
-</div>
-
-<!-- Halaman 5 Resepsi -->
-<section class="resepsi">
-
-  <div class="card-oval">
-
-    <!-- FOTO ATAS -->
-    <div class="img-top" style="background-image: url('asset/img/bg-2.jpg');"></div>
-    <!-- KONTEN -->
-    <div class="content4">
-      <p class="judulresepsi">RESEPSI PERNIKAHAN</p>
-    <!-- TANGGAL -->
-    <div class="tanggal4 fade-up">
-     <div class="hari4">SABTU</div>
-     <div class="divider"></div>
-     <div class="tgl4">
-       <span class="tgl-besar">26</span>
-       <span>NOV</span>
-       <span>2027</span>
-     </div>
+    <!-- Ayat -->
+    <div class="ayat">
+      "Demikianlah mereka bukan lagi dua, melainkan satu. Karena itu, apa yang telah dipersatukan Allah, tidak boleh
+      diceraikan manusia."
+      <br>
+      <b>Amsal 19:16</b>
     </div>
 
-    <div class="garis5"></div>
-      <p class="wakturesepsi fade-up">
-        13:00 WITA - SELESAI
-      </p>
-      <p class="tempatresepsi fade-up">
-        HOTEL HILTRA RANTEPAO
-      </p>
-      <p class="alamatresepsi fade-up">
-        Karassik, Rantepao, Toraja Utara
-      </p>
-      <a href="https://maps.app.goo.gl/HjvabD8AEN3kwD9R7" target="_blank" class="btn-map4 fade-up">
-        GOOGLE MAPS
-      </a>
-
+    <!-- Slider -->
+    <div id="sliderPage3" class="carousel carousel-fade main-slider" data-bs-ride="carousel" data-bs-interval="3000">
+      <div class="cinematic-slider">
+        <img src="asset/img/halaman3/slide1.jpg" class="active">
+        <img src="asset/img/halaman3/slide2.jpg">
+        <img src="asset/img/halaman3/slide3.jpg">
+      </div>
     </div>
 
-  </div>
+    <!-- Track berjalan -->
+    <div class="track-container">
+      <div class="track">
 
-</section>
-<!-- end pemberkatan -->
+        <img src="asset/img/halaman3/slide1.jpg">
+        <img src="asset/img/halaman3/slide2.jpg">
+        <img src="asset/img/halaman3/slide3.jpg">
+        <img src="asset/img/halaman3/slide1.jpg">
+        <img src="asset/img/halaman3/slide2.jpg">
+        <img src="asset/img/halaman3/slide3.jpg">
 
-<!-- Tanda Kasih -->
- <div class="tanda-kasih">
-    <div class="card-kasih text-center p-4">
+        <!-- duplikat -->
+        <img src="asset/img/halaman3/slide1.jpg">
+        <img src="asset/img/halaman3/slide2.jpg">
+        <img src="asset/img/halaman3/slide3.jpg">
+        <img src="asset/img/halaman3/slide1.jpg">
+        <img src="asset/img/halaman3/slide2.jpg">
+        <img src="asset/img/halaman3/slide3.jpg">
 
-      <h3 class="judul-kasih">
-        <span class="atas">TANDA</span>
-        <span class="bawah">Kasih</span>
-      </h3>
+      </div>
+    </div>
 
-      <p class="deskripsi-kasih">
-        Doa restu anda merupakan karunia yang sangat berarti bagi kami.
-        Dan jika memberi adalah ungkapan tanda kasih, anda dapat memberi kado secara cashless
-      </p>
+  </section>
+  <!-- end of halaman 3 -->
+  <div class="halaman4">
 
-      <div class="row mt-4">
+    <div class="card-oval">
 
-        <!-- Rekening 1 -->
-        <div class="col-6">
-          <div class="rekening-card">
-            <p class="bank">BCA</p>
-            <h5 id="rek1">1234567890</h5>
-            <p class="nama">a.n Yudi</p>
-            <button class="btn-salin" onclick="copyRek('rek1')">Salin</button>
+      <!-- FOTO ATAS -->
+      <div class="img-top" style="background-image: url('asset/img/halaman3/slide1.jpg');"></div>
+
+      <!-- KONTEN -->
+      <div class="content4">
+
+        <p class="title4 fade-up">PEMBERKATAN NIKAH</p>
+
+        <!-- TANGGAL -->
+        <div class="tanggal4 fade-up">
+
+          <div class="hari4">SABTU</div>
+
+          <div class="divider"></div>
+
+          <div class="tgl4">
+            <span class="tgl-besar">26</span>
+            <span>NOV</span>
+            <span>2027</span>
           </div>
         </div>
 
-        <!-- Rekening 2 -->
-        <div class="col-6">
-          <div class="rekening-card">
-            <p class="bank">BRI</p>
-            <h5 id="rek2">0987654321</h5>
-            <p class="nama">a.n Melia</p>
-            <button class="btn-salin" onclick="copyRek('rek2')">Salin</button>
+        <div class="garis4"></div>
+        <p class="waktupemberkatan fade-up">
+          09:00 WITA - SELESAI
+        </p>
+        <p class="tempat4 fade-up">
+          GEREJA KATOLIK PAROKI RANTEPAO
+        </p>
+
+        <p class="alamat4 fade-up">
+          Jl. Wolter Monginsidi, Rantepao, Toraja Utara
+        </p>
+
+        <a href="https://maps.app.goo.gl/avNRrbmJHccnjucr5" target="_blank" class="btn-map4 fade-up">
+          GOOGLE MAPS
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Halaman 5 Resepsi -->
+  <section class="resepsi">
+
+    <div class="card-oval">
+
+      <!-- FOTO ATAS -->
+      <div class="img-top" style="background-image: url('asset/img/bg-2.jpg');"></div>
+      <!-- KONTEN -->
+      <div class="content4">
+        <p class="judulresepsi">RESEPSI PERNIKAHAN</p>
+        <!-- TANGGAL -->
+        <div class="tanggal4 fade-up">
+          <div class="hari4">SABTU</div>
+          <div class="divider"></div>
+          <div class="tgl4">
+            <span class="tgl-besar">26</span>
+            <span>NOV</span>
+            <span>2027</span>
           </div>
         </div>
 
+        <div class="garis5"></div>
+        <p class="wakturesepsi fade-up">
+          13:00 WITA - SELESAI
+        </p>
+        <p class="tempatresepsi fade-up">
+          HOTEL HILTRA RANTEPAO
+        </p>
+        <p class="alamatresepsi fade-up">
+          Karassik, Rantepao, Toraja Utara
+        </p>
+        <a href="https://maps.app.goo.gl/HjvabD8AEN3kwD9R7" target="_blank" class="btn-map4 fade-up">
+          GOOGLE MAPS
+        </a>
+
       </div>
-      <div class="lux-sparkle">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
+
+    </div>
+
+  </section>
+  <!-- end pemberkatan -->
+
+  <!-- Tanda Kasih -->
+  <section>
+    <div class="tanda-kasih">
+      <div class="card-kasih text-center p-4">
+
+        <h3 class="judul-kasih">
+          <span class="atas">TANDA</span>
+          <span class="bawah">Kasih</span>
+        </h3>
+
+        <p class="deskripsi-kasih">
+          Doa restu anda merupakan karunia yang sangat berarti bagi kami.
+          Dan jika memberi adalah ungkapan tanda kasih, anda dapat memberi kado secara cashless
+        </p>
+        <!-- kelas rekening -->
+        <div class="rek-wrapper mt-4">
+
+          <!-- Rekening 1 -->
+          <div class="rek-wrapper mt-4">
+
+            <!-- Rekening 1 -->
+            <div class="rekening-card">
+              <p class="bank">Bank Rakyat Indonesia (BRI)</p>
+              <div class="rek-row">
+                <h5 id="rek1">123456789012345</h5>
+                <button class="btn-salin" onclick="copyRek('rek1')">
+                  <i class="bi bi-copy"></i>
+                </button>
+              </div>
+
+              <p class="nama">a.n Yudi</p>
+            </div>
+
+            <!-- Rekening 2 -->
+            <div class="rekening-card">
+              <p class="bank">Bank Negara Indonesia (BNI)</p>
+
+              <div class="rek-row">
+                <h5 id="rek2">987654321098765</h5>
+                <button class="btn-salin" onclick="copyRek('rek2')">
+                  <i class="bi bi-copy"></i>
+                </button>
+              </div>
+
+              <p class="nama">a.n Melia</p>
+            </div>
+
+          </div>
+          <!-- end class rekening -->
+          <div class="lux-sparkle">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+        <div id="toastCopy" class="toast-copy">
+          Nomor rekening berhasil disalin
+        </div>
+      </div>
+  </section>
+  <!-- end of tanda kasih -->
+
+  <!-- Ucapan -->
+  <!-- HALAMAN UCAPAN -->
+  <section class="komentar-section">
+    <div class="komentar-card">
+      <h3 class="judul-komentar">Best Wishes 🤍</h3>
+      <p class="subtext-komentar">Berikan ucapan & doa restu</p>
+
+      <!-- Form komentar -->
+      <input type="text" id="inputNama" class="input-komentar" placeholder="Nama">
+      <textarea id="inputPesan" class="textarea-komentar" rows="4" placeholder="Tulis ucapan dan doa..."></textarea>
+      <button id="btnKirim" class="btn-komentar">Kirim</button>
+
+      <!-- Status kirim -->
+      <div id="statusKirim" class="status-kirim"></div>
+
+      <!-- Jumlah komentar -->
+      <p class="jumlah-komentar">Jumlah komentar: <span id="count">0</span></p>
+
+      <!-- List komentar -->
+      <div id="listKomentar" class="list-komentar"></div>
+
+      <!-- Pagination -->
+      <div class="pagination-komentar">
+        <button id="prev" class="page-btn">← Prev</button>
+        <span id="pageInfo">1</span>
+        <button id="next" class="page-btn">Next →</button>
       </div>
     </div>
-    <div id="toastCopy" class="toast-copy">
-      Nomor rekening berhasil disalin
-    </div>
-  </div>
+  </section>
+  <!-- end of ucapan -->
 
- <!-- end of tanda kasih -->
-
-<!-- Ucapan -->
-<!-- HALAMAN UCAPAN -->
-<section class="komentar-section">
-  <div class="komentar-card">
-    <h3 class="judul-komentar">Best Wishes 🤍</h3>
-    <p class="subtext-komentar">Berikan ucapan & doa restu</p>
-
-    <!-- Form komentar -->
-    <input type="text" id="inputNama" class="input-komentar" placeholder="Nama">
-    <textarea id="inputPesan" class="textarea-komentar" rows="4" placeholder="Tulis ucapan dan doa..."></textarea>
-    <button id="btnKirim" class="btn-komentar">Kirim</button>
-
-    <!-- Status kirim -->
-    <div id="statusKirim" class="status-kirim"></div>
-
-    <!-- Jumlah komentar -->
-    <p class="jumlah-komentar">Jumlah komentar: <span id="count">0</span></p>
-
-    <!-- List komentar -->
-    <div id="listKomentar" class="list-komentar"></div>
-
-    <!-- Pagination -->
-    <div class="pagination-komentar">
-      <button id="prev" class="page-btn">← Prev</button>
-      <span id="pageInfo">1</span>
-      <button id="next" class="page-btn">Next →</button>
-    </div>
-  </div>
-</section>
-<!-- end of ucapan -->
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="js/script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/script.js"></script>
 
 
 </body>
+
 </html>
