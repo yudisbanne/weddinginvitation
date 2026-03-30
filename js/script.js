@@ -42,7 +42,7 @@ function bukaUndangan() {
   }, 800);
 
   if (musik && musik.paused) {
-    musik.play().catch(() => {});
+    musik.play().catch(() => { });
   }
 
   setTimeout(() => {
@@ -56,7 +56,7 @@ function bukaUndangan() {
 ========================= */
 document.addEventListener("click", () => {
   if (musik && musik.paused) {
-    musik.play().catch(() => {});
+    musik.play().catch(() => { });
   }
 }, { once: true });
 
@@ -200,7 +200,7 @@ setInterval(() => {
   index = (index + 1) % slides.length;
 
   slides[index].classList.add('active');
-}, 4400); 
+}, 4400);
 
 
 /* =========================
@@ -248,42 +248,42 @@ const perPage = 10;
 // 🔥 JANGAN JALANKAN JIKA ELEMENT TIDAK ADA
 if (listKomentar) {
 
- function renderKomentar() {
-  listKomentar.innerHTML = '';
+  function renderKomentar() {
+    listKomentar.innerHTML = '';
 
-  const totalPage = Math.ceil(komentarData.length / perPage) || 1;
-  pageInfo.textContent = `${currentPage} / ${totalPage}`;
+    const totalPage = Math.ceil(komentarData.length / perPage) || 1;
+    pageInfo.textContent = `${currentPage} / ${totalPage}`;
 
-  const start = (currentPage - 1) * perPage;
-  const end = start + perPage;
-  const pageKomentar = komentarData.slice(start, end);
+    const start = (currentPage - 1) * perPage;
+    const end = start + perPage;
+    const pageKomentar = komentarData.slice(start, end);
 
-  pageKomentar.forEach((k) => {
-    const div = document.createElement('div');
-    div.classList.add('item-komentar');
+    pageKomentar.forEach((k) => {
+      const div = document.createElement('div');
+      div.classList.add('item-komentar');
 
-    div.innerHTML = `
+      div.innerHTML = `
       <div class="nama-komentar"><b>${k.nama}</b></div>
       <div class="isi-komentar">${k.pesan}</div>
       <div class="waktu-komentar">${formatWaktuRelative(new Date(k.waktu))}</div>
     `;
 
-    listKomentar.appendChild(div);
-  });
+      listKomentar.appendChild(div);
+    });
 
-  // 🔥 KUNCI UTAMA DI SINI
-  if (pageKomentar.length > 2) {
-    listKomentar.style.maxHeight = '140px'; // kira2 tinggi 2 komentar
-    listKomentar.style.overflowY = 'auto';
-  } else {
-    listKomentar.style.maxHeight = 'none';
-    listKomentar.style.overflowY = 'visible';
+    // 🔥 KUNCI UTAMA DI SINI
+    if (pageKomentar.length > 2) {
+      listKomentar.style.maxHeight = '140px'; // kira2 tinggi 2 komentar
+      listKomentar.style.overflowY = 'auto';
+    } else {
+      listKomentar.style.maxHeight = 'none';
+      listKomentar.style.overflowY = 'visible';
 
-    listKomentar.classList.remove('scroll-active');
+      listKomentar.classList.remove('scroll-active');
+    }
+
+    countKomentar.textContent = komentarData.length;
   }
-
-  countKomentar.textContent = komentarData.length;
-}
 
   function loadKomentar() {
     fetch(API_URL)
@@ -313,18 +313,18 @@ if (listKomentar) {
         method: "POST",
         body: JSON.stringify({ nama, pesan })
       })
-      .then(() => {
-        statusKirim.textContent = "Thanks for your comment!";
-        statusKirim.className = "status-kirim success";
+        .then(() => {
+          statusKirim.textContent = "Thanks for your comment!";
+          statusKirim.className = "status-kirim success";
 
-        document.getElementById('inputNama').value = '';
-        document.getElementById('inputPesan').value = '';
+          document.getElementById('inputNama').value = '';
+          document.getElementById('inputPesan').value = '';
 
-        loadKomentar();
-      })
-      .catch(() => {
-        statusKirim.textContent = "Gagal kirim!";
-      });
+          loadKomentar();
+        })
+        .catch(() => {
+          statusKirim.textContent = "Gagal kirim!";
+        });
     });
   }
 
@@ -351,3 +351,16 @@ if (listKomentar) {
   loadKomentar();
   setInterval(loadKomentar, 5000);
 }
+// tanda kasih
+function copyRek(id) {
+  const text = document.getElementById(id).innerText;
+  navigator.clipboard.writeText(text);
+
+  const toast = document.getElementById("toastCopy");
+  toast.classList.add("show");
+
+  setTimeout(() => {
+    toast.classList.remove("show");
+  }, 2000); // hilang setelah 2 detik
+}
+// akhir tanda kasih
