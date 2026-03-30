@@ -217,20 +217,20 @@ body, html {
 /* HALAMAN 3 */
  #halaman3 .nama3 {
   font-family: 'Alex Brush', cursive;
-  font-size: 54px;
+  font-size: 47px;
   margin-bottom: 12px;
   color: #f9f9f9;
 }
 
 #halaman3 .ayat {
-  font-size: 18px;
+  font-size: 16px;
   color: #fcfcfc;
   margin-bottom: 20px;
 }
 
 #halaman3 .main-slider img {
   border-radius: 15px;
-  height: 440px;
+  height: 340px;
   object-fit: cover;
 }
 /* animasi teks */
@@ -276,7 +276,7 @@ body, html {
 .cinematic-slider {
   position: relative;
   width: 100%;
-  height: 440px; /* 🔥 samakan dengan carousel lama */
+  height: 340px; /* 🔥 samakan dengan carousel lama */
   overflow: hidden;
   border-radius: 15px;
 }
@@ -310,7 +310,7 @@ body, html {
 }
 
 #halaman3 .track img {
-  width: 137px;
+  width: 127px;
   height: 157px;
   object-fit: cover;
   border-radius: 10px;
