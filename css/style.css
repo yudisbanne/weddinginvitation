@@ -72,22 +72,28 @@ html {
 
 .names {
   font-family: 'Amoresa';
-  font-size: 47px;
+  font-size: 34px;
   margin: 0;
 }
 
 .guest {
   margin-bottom: 10px;
+  font-family: 'Poppins', sans-serif !important;
+
 }
 
 .guest small {
   font-size: 14px;
   opacity: 0.9;
+  font-family: 'Poppins', sans-serif !important;
 }
 
 .guest h2 {
-  margin: 8px 0;
-  font-size: 20px;
+  margin: 10px 0;
+  font-size: 19px;
+  font-weight: 400;
+  font-family: 'Poppins', sans-serif !important;
+
 }
 /* style button buka undangan */
 .btn-undangan {
@@ -195,9 +201,9 @@ html {
 /* NAMA */
   .names2 {
     font-family: 'Amoresa';
-    font-size: 45px;
+    font-size: 34px;
     font-weight: 430;
-    margin-bottom: 15px;
+    margin-bottom: 19px;
     color: white;
   }
 
