@@ -1,7 +1,7 @@
 /* font alternative halaman 2 */
 @font-face {
-  font-family: 'BrookeSmithScript';
-  src: url('../asset/font/BrookeSmithScript.ttf') format('truetype');
+  font-family: 'Amoresa';
+  src: url('../asset/font/Amoresa.otf') format('truetype');
   font-display: swap;
 }
 /* ANIMASI ZOOM HALUS */
@@ -71,7 +71,7 @@ html {
 }
 
 .names {
-  font-family: 'Alex Brush', cursive;
+  font-family: 'Amoresa';
   font-size: 47px;
   margin: 0;
 }
@@ -89,16 +89,57 @@ html {
   margin: 8px 0;
   font-size: 20px;
 }
-
+/* style button buka undangan */
 .btn-undangan {
-  margin-top: 10px;
-  padding: 12px 24px;
-  border: 1px solid rgb(183, 183, 183);
-  background: transparent;
-  color: rgb(247, 179, 179);
-  border-radius: 25px;
+  margin-top: 13px;
+  padding: 14px 24px;
+
+  width: 100%;
+  max-width: 280px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+
+  border: none;
+  border-radius: 40px;
+
   font-size: 16px;
+  font-weight: 500;
+
+  color: white;
+
+  /* GRADIENT ELEGAN */
+  background: linear-gradient(135deg, #ff6b9a, #ff9a9e);
+
+  /* SHADOW HALUS */
+  box-shadow: 0 6px 20px rgba(255, 107, 154, 0.4);
+
+  transition: all 0.25s ease;
+
+  /* HILANGKAN TAP BIRU DI HP */
+  -webkit-tap-highlight-color: transparent;
 }
+
+/* HOVER (DESKTOP) */
+.btn-undangan:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(255, 107, 154, 0.6);
+}
+
+/* EFEK TEKAN (PENTING UNTUK HP) */
+.btn-undangan:active {
+  transform: scale(0.96);
+  box-shadow: 0 4px 12px rgba(255, 107, 154, 0.4);
+}
+
+/* RESPONSIVE HP KECIL */
+@media (max-width: 360px) {
+  .btn-undangan {
+    font-size: 14px;
+    padding: 12px 20px;
+  }
+}
+/* end of button buka undangan */
 
 /* HALAMAN 2 */
 
@@ -153,9 +194,9 @@ html {
 
 /* NAMA */
   .names2 {
-    font-family: 'BrookeSmithScript';
-    font-size: 55px;
-    font-weight: 470;
+    font-family: 'Amoresa';
+    font-size: 45px;
+    font-weight: 430;
     margin-bottom: 15px;
     color: white;
   }
